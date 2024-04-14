@@ -1,0 +1,24 @@
+.mainTitle {
+    text-align: center;
+    font-family: 'Pretendard';
+    font-size: 35px;
+
+    position: relative;
+    top: 45px;
+}
+
+.missionContainer {
+    width: 70%;
+    margin-left: 15%;
+}
+
+.missionTitle {
+    font-family: 'Pretendard';
+    font-style: italic;
+}
+
+.missionInfos {
+    height: 500px;
+
+    background-color: darkslategray;
+}

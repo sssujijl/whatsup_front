@@ -1,0 +1,80 @@
+.menu {
+    font-family: 'Pretendard';
+
+    width: 80%;
+    height: 230px;
+
+    border: 0.5px solid gray;
+
+    margin-left: 10%;
+    margin-top: 50px;
+    padding: 30px;
+}
+
+.menu img {
+    border-radius: 100px;
+    border: 1px solid black;
+
+    width: 160px;
+    height: 160px;
+}
+
+.select {
+    display: flex;
+}
+
+.select p {
+    margin-left: 85px;
+}
+
+.sides {
+    font-family: 'Pretendard';
+    width: 300px;
+    margin-left: 10%;
+}
+
+.points {
+    height: 150px;
+    border-bottom: 0.1px solid gray;
+    margin-top: 50px;
+}
+
+.points p {
+    margin-left: 50px;
+    margin-top: 50px;
+}
+
+.titles {
+    height: 500px;
+    margin-top: 50px;
+}
+
+.titles p {
+    margin-left: 50px;
+    margin-top: 50px;
+}
+
+.mainContainer {
+    font-family: 'Pretendard';
+
+    width: 66.5%;
+
+    /* border: 0.1px solid gray; */
+}
+
+.mainTitle {
+    font-size: 30px;
+    text-align: center;
+
+    margin-top: 50px;
+}
+
+.contents {
+    border-bottom: 0.1px solid gray;
+
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 50px;
+
+    padding: 15px;
+}

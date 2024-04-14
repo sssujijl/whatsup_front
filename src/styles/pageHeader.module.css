@@ -1,0 +1,119 @@
+.header {
+    display: flex;
+
+    font-family: 'Pretendard';
+    width: 100%;
+
+    position: relative;
+    margin-bottom: 180px;
+    z-index: 1;
+}
+
+.searchContainer {
+    margin-left: 34%;
+    margin-top: 80px;
+}
+
+.searchInput {
+    background-color: transparent;
+
+    border: 1px solid black;
+    border-radius: 30px;
+
+    width: 600px;
+    height: 50px;
+    text-indent: 20px;
+
+    color: black;
+}
+
+.searchBtn {
+    background-color: transparent;
+    border: 1px solid transparent;
+    color: black;
+
+    font-size: 25px;
+}
+
+.category {
+    position: absolute;
+    left: 395px;
+    top: 150px;
+
+    height: 50px;
+}
+
+.orderBy1 {
+    position: absolute;
+    right: 500px;
+    top: 160px;
+}
+
+.orderBy2 {
+    position: absolute;
+    right: 400px;
+    top: 160px;
+}
+
+.categoryList {
+    z-index: 1;
+
+    background-color: white;
+    border: 0.5px solid gray;
+    border-radius: 15px;
+
+    width: 450px;
+    height: 180px;
+
+    position: absolute;
+    left: 83px;
+    top: 210px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.categoryList button {
+    border: 0.5px solid gray;
+    border-radius: 25px;
+    background-color: transparent;
+
+    padding: 5px;
+    height: 30px;
+    width: 50px;
+
+    font-family: 'Pretendard';
+    font-size: 14px;
+    color: dimgray;
+
+    margin-left: 12px;
+    margin-top: 15px;
+}
+
+.categoryList button:hover {
+    background-color: rgba(200, 200, 200, 0.5);
+    transition: 0.3s;
+}
+
+.categoryList button:active {
+    background-color: rgba(200, 200, 200, 0.5);
+    border: 1px solid gray;
+    font-weight: bold;
+}
+
+.btns {
+    margin-top: 5px;
+    margin-bottom: 25px;
+}
+
+.btns button {
+    width: 120px;
+}
+
+.listBtn {
+    position: relative;
+    top: 30px;
+    left: 140px;
+
+    background-color: black;
+}

@@ -1,0 +1,99 @@
+.container {
+    display: flex;
+    position: relative;
+    bottom: 130px;
+}
+
+.map {
+    width: 70%;
+    height: 750px;
+}
+
+.placeList {
+    font-family: 'Pretendard';
+    background-color: white;
+    width: 30%;
+
+    border: 1px solid gray;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+
+    position: relative;
+    bottom: 65px;
+}
+
+.place {
+    border-bottom: 0.1px solid gray;
+    border-top: 0.1px solid gray;
+    height: 280px;
+
+    padding: 12px;
+}
+
+.place:hover {
+    background-color: rgb(230, 230, 230, 0.5);
+    transition: 0.5s;
+}
+
+.imgs {
+    display: flex;
+    background-color: antiquewhite;
+    height: 150px;
+}
+
+.imgs img {
+    width: 130px;
+
+    margin-left: 25px;
+}
+
+.place_title {
+    position: relative;
+    left: 35px;
+    width: auto;
+}
+
+.place_category {
+    color: gray;
+    font-size: 15px;
+
+    height: 20px;
+
+    position: relative;
+    left: 50px;
+    top: 15px;
+}
+
+.place_star {
+    width: 30px;
+    height: 30px;
+
+    border: transparent;
+    background-color: transparent;
+
+    font-size: 20px;
+    color: rgb(0, 0, 0, 0.5);
+    margin-left: auto;
+}
+
+.place_status {
+    width: 50px;
+
+    margin-left: 40px;
+}
+
+.place_review {
+    margin-left: 25px;
+}
+
+.place_addressContainer {
+    display: flex;
+
+    margin-left: 25px;
+}
+
+.place_addressBtn {
+    background-color: transparent;
+    border: transparent;
+    font-size: 16px;
+}

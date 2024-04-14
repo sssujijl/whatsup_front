@@ -1,0 +1,27 @@
+.centerContainer {
+    width: 70%;
+    height: 385px;
+
+    margin-top: 150px;
+    margin-left: 15%;
+
+    font-family: 'Pretendard';
+}
+
+.centerContainer h3 {
+    color: gray;
+    margin-left: 15px;
+}
+
+.places {
+    border: 1px solid black;
+    height: 80%;
+}
+
+.place {
+    border: 1px solid black;
+    height: 100%;
+    width: 300px;
+
+    border-radius: 30px;
+}
