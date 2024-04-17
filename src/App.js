@@ -8,12 +8,10 @@ import React, { useState } from 'react';
 import Map from "./pages/map";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
-import { createPortal } from "react-dom";
 import Foodie from "./pages/foodie";
 import FoodMate from "./pages/foodmate";
 import Places from "./pages/places";
 import User from "./pages/user";
-
 
 function App() {
   const [login, setLogin] = useState(false);

@@ -9,10 +9,10 @@ const Title = styled.h1`
 `;
 
 export default function Signup() {
-  const [showTimer, setShowTimer] = useState(false); // 타이머 보여줄지 여부
-  const [remainingTime, setRemainingTime] = useState(180); // 남은 시간 (초)
-  const [verificationCode, setVerificationCode] = useState(""); // 입력한 인증 번호
-  const [isVerified, setIsVerified] = useState(false); // 인증 여부
+  const [showTimer, setShowTimer] = useState(false);
+  const [remainingTime, setRemainingTime] = useState(180);
+  const [verificationCode, setVerificationCode] = useState("");
+  const [isVerified, setIsVerified] = useState(false);
 
   // 중복 확인 버튼 클릭 시
   const handleCheckDuplicate = () => {

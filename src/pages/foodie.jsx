@@ -7,7 +7,7 @@ export default function Foodie() {
     
     return (
         <>
-            <Header category={'Category'} orderBy={true}/>
+            <Header category={'Category'} orderBy={true} search={true}/>
             <BestList/>
             <BestList/>
         </>

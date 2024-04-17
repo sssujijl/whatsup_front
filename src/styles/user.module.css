@@ -2,21 +2,60 @@
     font-family: 'Pretendard';
 
     width: 80%;
-    height: 230px;
+    height: 200px;
 
     border: 0.5px solid gray;
 
     margin-left: 10%;
     margin-top: 50px;
-    padding: 30px;
+
+    display: flex;
 }
 
 .menu img {
     border-radius: 100px;
     border: 1px solid black;
 
-    width: 160px;
-    height: 160px;
+    width: 180px;
+    height: 180px;
+
+    position: relative;
+    left: 30px;
+    top: 10px;
+}
+
+.name {
+    position: relative;
+    left: 100px;
+    top: 80px;
+}
+
+.follwer {
+    position: relative;
+    left: 200px;
+    top: 80px;
+}
+
+.following {
+    position: relative;
+    left: 300px;
+    top: 80px;
+}
+
+.points {
+    position: relative;
+    left: 450px;
+    top: 80px;
+}
+
+.titles {
+    position: relative;
+    left: 600px;
+    top: 15px;
+}
+
+.menu p {
+    text-align: center;
 }
 
 .select {
@@ -29,37 +68,22 @@
 
 .sides {
     font-family: 'Pretendard';
-    width: 300px;
+    font-size: 19px;
+
+    width: 150px;
     margin-left: 10%;
 }
 
-.points {
-    height: 150px;
+.sides p {
+    margin-top: 80px;
     border-bottom: 0.1px solid gray;
-    margin-top: 50px;
-}
-
-.points p {
-    margin-left: 50px;
-    margin-top: 50px;
-}
-
-.titles {
-    height: 500px;
-    margin-top: 50px;
-}
-
-.titles p {
-    margin-left: 50px;
-    margin-top: 50px;
 }
 
 .mainContainer {
     font-family: 'Pretendard';
 
-    width: 66.5%;
-
-    /* border: 0.1px solid gray; */
+    width: 60%;
+    margin-left: 10%;
 }
 
 .mainTitle {

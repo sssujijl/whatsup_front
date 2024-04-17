@@ -5,40 +5,58 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 const Title = styled.h1`
-font-family: 'WAGURI';
-font-size: 38px;
-position: absolute;
-left: 50px;
-top: 15px;
-`
+  font-family: "WAGURI";
+  font-size: 38px;
+  position: absolute;
+  left: 50px;
+  top: 15px;
+`;
+
+const HeaderContainer = styled.div`
+  display: flex;
+
+  font-family: "Pretendard";
+  width: 100%;
+
+  position: relative;
+  margin-bottom: ${({ marginBottom }) => marginBottom || 0}px;
+  z-index: 1;
+`;
 
 export default function Header(props) {
-
   const [category, setCategory] = useState(false);
 
   return (
     <>
-      <div className={style.header}>
+      <HeaderContainer  marginBottom={props.marginBottom}>
         <Title>{props.title}</Title>
-        <h2
+        <p
           className={style.category}
           onMouseEnter={() => setCategory(true)}
           onMouseLeave={() => setCategory(false)}
         >
           {props.category && props.category}
-        </h2>
+        </p>
         {category && <Category setCategory={setCategory} />}
-        { props.orderBy && <OrderBy/> }
-        <div className={style.searchContainer}>
-          <input
-            type="text"
-            placeholder="검색어를 입력하세요."
-            className={style.searchInput}
-          />
-          <button className={style.searchBtn}>
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-          </button>
-        </div>
+        {props.orderBy && <OrderBy />}
+        {props.search && <SearchInput />}
+      </HeaderContainer>
+    </>
+  );
+}
+
+function SearchInput() {
+  return (
+    <>
+      <div className={style.searchContainer}>
+        <input
+          type="text"
+          placeholder="검색어를 입력하세요."
+          className={style.searchInput}
+        />
+        <button className={style.searchBtn}>
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
+        </button>
       </div>
     </>
   );
@@ -50,7 +68,7 @@ function OrderBy() {
       <p className={style.orderBy1}>최신순</p>
       <p className={style.orderBy2}>인기순</p>
     </>
-  )
+  );
 }
 
 function Category(props) {
@@ -61,23 +79,16 @@ function Category(props) {
         onMouseEnter={() => props.setCategory(true)}
         onMouseLeave={() => props.setCategory(false)}
       >
-        <div>
-          <button>한식</button>
-          <button>양식</button>
-          <button>중식</button>
-          <button>일식</button>
-          <button>야식</button>
-          <button>분식</button>
-          <button>카페</button>
-        </div>
-        <div className={style.btns}>
-          <button>아시아음식</button>
-          <button>베이커리</button>
-          <button>패스트푸드</button>
-          <button className={style.listBtn} style={{ borderRadius: "5px" }}>
-            적용하기
-          </button>
-        </div>
+        <button style={{ marginLeft: "110px" }}>한식</button>
+        <button>양식</button>
+        <button>중식</button>
+        <button>일식</button>
+        <button>야식</button>
+        <button>분식</button>
+        <button>카페</button>
+        <button style={{ width: "80px" }}>아시아음식</button>
+        <button style={{ width: "80px" }}>베이커리</button>
+        <button style={{ width: "80px" }}>패스트푸드</button>
       </div>
     </>
   );
