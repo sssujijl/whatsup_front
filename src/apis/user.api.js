@@ -12,9 +12,9 @@ export default class UserAPI {
         }
     }
 
-    static async sendMailer(data) {
+    static async verificationCode(data) {
         try {
-            const response = await axios.post('/users/sendMail', data);
+            const response = await axios.post('/users/checkVerification', data);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -22,12 +22,11 @@ export default class UserAPI {
         }
     }
 
-    static async verificationCode(data) {
+    static async checkDuplicate(data) {
         try {
-            const response = await axios.post('/users/checkVerification', data);
+            const response = await axios.post('/users/checkDuplicate', data);
             return response.data;
         } catch (error) {
-            console.error(error);
             throw error;
         }
     }

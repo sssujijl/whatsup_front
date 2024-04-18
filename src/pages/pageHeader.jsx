@@ -38,11 +38,20 @@ export default function Header(props) {
           {props.category && props.category}
         </p>
         {category && <Category setCategory={setCategory} />}
-        {props.orderBy && <OrderBy />}
+        {props.orderBy && <OrderBy handleOrderByChange={props.handleOrderByChange} orderBy={props.OrderBy} />}
+        {props.create && <CreatePost/>}
         {props.search && <SearchInput />}
       </HeaderContainer>
     </>
   );
+}
+
+function CreatePost() {
+  return (
+    <>
+      <p className={style.create}>게시물 작성하기</p>
+    </>
+  )
 }
 
 function SearchInput() {
@@ -62,12 +71,14 @@ function SearchInput() {
   );
 }
 
-function OrderBy() {
+function OrderBy({ handleOrderByChange, orderBy }) {
+
   return (
-    <>
-      <p className={style.orderBy1}>최신순</p>
-      <p className={style.orderBy2}>인기순</p>
-    </>
+      <select className={style.orderBy} onChange={handleOrderByChange} value={orderBy}>
+          <option value="createdAt">최신순</option>
+          <option value="popular">인기순</option>
+          <option value="views">조회수순</option>
+      </select>
   );
 }
 

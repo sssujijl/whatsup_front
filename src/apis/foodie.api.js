@@ -4,7 +4,10 @@ export default class FoodieAPI {
 
     static async findAllFoodie(data) {
         try {
-            const response = await axios.get('/foodies');
+            console.log(data);
+            const response = await axios.get('/foodies', { 
+                params: { orderBy: data } 
+            });
             console.log(response.data)
             return response.data;
         } catch (error) {

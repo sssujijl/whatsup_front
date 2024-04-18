@@ -34,16 +34,23 @@
     z-index: 2;
 }
 
-.orderBy1 {
+.orderBy {
     position: absolute;
-    right: 500px;
-    top: 160px;
+    right: 530px;
+    top: 170px;
+    border: 1px solid gray;
+    padding: 5px;
 }
 
-.orderBy2 {
+.create {
     position: absolute;
     right: 400px;
-    top: 160px;
+    top: 157px;
+
+    border: 1px solid gray;
+    padding: 6px;
+    font-size: 13px;
+
 }
 
 .categoryList {
