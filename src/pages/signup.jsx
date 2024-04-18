@@ -2,10 +2,9 @@ import styled from "styled-components";
 import style from "../styles/signup.module.css";
 import { useState } from "react";
 
-const Title = styled.h1`
+const Title = styled.h2`
   font-family: "Pretendard";
-  margin-bottom: 80px;
-  margin: 30px 0 100px 30px;
+  text-align: center;
 `;
 
 export default function Signup() {
@@ -46,7 +45,7 @@ export default function Signup() {
         <input
           type="text"
           placeholder="닉네임을 입력해주세요."
-          style={{ width: "247px" }}
+          style={{ width: "33.5%" }}
         />
         <button className={style.checkBtn}>중복 확인</button>
 
@@ -54,7 +53,7 @@ export default function Signup() {
         <input
           type="email"
           placeholder="이메일을 입력해주세요."
-          style={{ width: "247px" }}
+          style={{ width: "33.5%" }}
         />
         <button className={style.checkBtn} onClick={handleCheckDuplicate}>
           중복 확인
@@ -79,7 +78,7 @@ export default function Signup() {
         <input
           type="tel"
           placeholder="휴대전화번호를 입력해주세요."
-          style={{ width: "247px" }}
+          style={{ width: "33.5%" }}
         />
         <button className={style.checkBtn}>중복 확인</button>
 

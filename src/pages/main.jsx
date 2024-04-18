@@ -7,18 +7,18 @@ import { useState, useEffect } from 'react';
 export default function Main() {
     const [mission, setMission] = useState(null);
 
-    // useEffect(() => {
-    //     async function fetchMission() {
-    //         try {
-    //             const missionData = await MissionAPI.findTodayMission();
-    //             setMission(missionData);
-    //         } catch (error) {
-    //             console.error('Error fetching mission:', error);
-    //         }
-    //     }
+    useEffect(() => {
+        async function fetchMission() {
+            try {
+                const missionData = await MissionAPI.findTodayMission();
+                setMission(missionData);
+            } catch (error) {
+                console.error('Error fetching mission:', error);
+            }
+        }
 
-    //     fetchMission();
-    // }, []);
+        fetchMission();
+    }, []);
 
     return (
         <>

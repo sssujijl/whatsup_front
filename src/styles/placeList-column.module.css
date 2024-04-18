@@ -44,11 +44,9 @@
     color: gray;
     font-size: 15px;
 
-    height: 20px;
-
     position: relative;
-    left: 50px;
-    top: 15px;
+    left: 40px;
+    top: 8px;
 }
 
 .place_star {

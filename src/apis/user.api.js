@@ -71,4 +71,25 @@ export default class UserAPI {
             throw error;
         }
     }
+
+    static async googleLogin() {
+        try {
+            const response = await axios.get('/users/signin/google');
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    static async naverLogin() {
+        try {
+            const response = await axios.get('/users/signin/naver');
+            console.log(response);
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
 }

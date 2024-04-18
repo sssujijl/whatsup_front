@@ -33,7 +33,7 @@ export default function PlaceList(props) {
           props.places.slice(0, 10).map((place, index) => (
             <div className={style.place} key={index}>
               <FlexDiv>
-                <h2 className={style.place_title}>{place.title}</h2>
+                <h3 className={style.place_title}>{place.title}</h3>
                 <p className={style.place_category}>{place.foodCategory.category}</p>
                 <button className={style.place_star}>
                   <FontAwesomeIcon icon={faStar} />

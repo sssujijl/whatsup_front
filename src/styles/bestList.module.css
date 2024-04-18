@@ -1,4 +1,4 @@
-.Foodie {
+.post {
     border: 0.11px solid gray;
     border-radius: 30px;
     height: 100px;
@@ -6,10 +6,17 @@
     margin-bottom: 15px;
 
     padding: 15px;
+    position: relative;
 }
 
 .title {
     margin-left: 15px;
+}
+
+.level {
+    position: absolute;
+    right: 50px;
+    top: 8px;
 }
 
 .content {
@@ -17,10 +24,10 @@
 }
 
 .content p {
-    margin-left: 15px;
+    margin-left: 30px;
 }
 
 .createdAt {
-    position: relative;
-    left: 58%;
+    position: absolute;
+    right: 50px;
 }

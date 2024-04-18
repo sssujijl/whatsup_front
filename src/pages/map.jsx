@@ -46,7 +46,7 @@ export default function Map() {
       const location = new naver.maps.LatLng(myLocation.latitude, myLocation.longitude);
       const mapOptions = {
         center: location,
-        zoom: 18,
+        zoom: 17,
         zoomControl: true,
         zoomControlOptions: {
           position: naver.maps.Position.RIGHT_TOP,
