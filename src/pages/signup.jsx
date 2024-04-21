@@ -24,7 +24,7 @@ export default function Signup() {
   const [birth, setBirth] = useState("");
   const [gender, setGender] = useState(["남자", "여자"]);
   const [phone, setPhone] = useState("");
-  const [smsConsent, setSmsConsent] = useState("");
+  const [smsConsent, setSmsConsent] = useState();
 
   const handleSignUp = async (event) => {
     event.preventDefault();
@@ -42,7 +42,7 @@ export default function Signup() {
       };
       await UserAPI.signUp(format);
 
-      navigate('/')
+      navigate('/login')
     } catch (error) {
       console.error(error);
     }
@@ -51,9 +51,9 @@ export default function Signup() {
   const handleCheckDuplicate = async (event) => {
     event.preventDefault();
     try {
-      const formData = {nickName} || {phone};
+      const formData = {nickName, phone};
       await UserAPI.checkDuplicate(formData);
-      alert(`${nickName || phone} 사용 가능합니다.`)
+      alert('사용 가능합니다.')
     } catch (error) {
       console.error(error);
       alert(`${nickName || phone} 중복되었습니다.`);
@@ -78,8 +78,9 @@ export default function Signup() {
   };
 
   // 타이머 시작 함수
+  let timer;
   const startTimer = () => {
-    const timer = setInterval(() => {
+    timer = setInterval(() => {
       let time = remainingTime;
 
       setRemainingTime((time) => time - 1);
@@ -89,9 +90,17 @@ export default function Signup() {
       clearInterval(timer);
     }, remainingTime * 1000);
   };
-  
+
   useEffect(() => {
-    console.log(remainingTime);
+    if (isVerified === true) {
+      clearInterval(timer);
+      setShowTimer(false);
+      setRemainingTime(180);
+      alert('인증이 완료되었습니다.')
+    }
+  }, [isVerified])
+
+  useEffect(() => {
     if (remainingTime === 0) {
       setShowTimer(false);
       setRemainingTime(180);
@@ -99,9 +108,9 @@ export default function Signup() {
     }
   }, [remainingTime])
 
-  
   return (
     <>
+    <button onClick={() => {console.log('버튼 누름'); setIsVerified(true)}}>누르세요</button>
       <div className={style.container}>
         <Title>이메일 회원가입</Title>
         <h4>이름</h4>
@@ -221,7 +230,7 @@ export default function Signup() {
           style={{ width: "25px", height: "25px" }}
           className={style.smsInput}
           value={smsConsent}
-          onChange={(e) => setSmsConsent(e.target.value)}
+          onChange={(e) => setSmsConsent(e.target.checked)}
         />
 
         <button className={style.signupBtn} onClick={handleSignUp}>회원가입하기</button>

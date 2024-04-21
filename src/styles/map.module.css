@@ -24,3 +24,12 @@
     overflow-y: auto;
     max-height: 1500px;
 }
+
+.place {
+    width: 30%;
+    border: 1px solid gray;
+
+    overflow-y: auto;
+    max-height: 500px;
+    position: absolute;
+}

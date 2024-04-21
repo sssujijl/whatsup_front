@@ -5,10 +5,12 @@ export default class FoodMateAPI {
     static async findAllFoodMates(data) {
         try {
             const response = await axios.get('/foodmates', { 
-                params: { orderBy: data } 
+                params: { 
+                    orderBy: data.orderBy,
+                    category: data.selectCategory
+                } 
             });
-            console.log(response.data.data)
-            return response.data.data;
+            return response.data;
         } catch (error) {
             console.error(error);
             throw error;

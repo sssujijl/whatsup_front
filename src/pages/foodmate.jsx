@@ -7,12 +7,17 @@ import FoodMateAPI from '../apis/foodMate.api';
 export default function FoodMate() {
     const [foodMates, setFoodMates] = useState(null);
     const [orderBy, setOrderBy] = useState('createdAt');
+    const [selectCategory, setSelectCategory] = useState(null);
 
     useEffect(() => {
         async function findAllFoodMates(orderBy) {
             try {
-                const foodMates = await FoodMateAPI.findAllFoodMates(orderBy);
-                setFoodMates(foodMates);
+                const foodMates = await FoodMateAPI.findAllFoodMates({orderBy, selectCategory});
+                if (!foodMates.message) {
+                    setFoodMates(foodMates);
+                } else {
+                    alert(foodMates.message)
+                }
             } catch (error) {
                 console.log(error);
             }
@@ -29,11 +34,13 @@ export default function FoodMate() {
         <>
             <Header 
                 category={'Category'} 
+                setSelectCategory={setSelectCategory}
                 orderBy={true} 
                 OrderBy={orderBy}
                 handleOrderByChange={handleOrderByChange}
                 search={true} 
                 create={true}
+                region={true}
             />
             <BestList data={foodMates}/>
         </>

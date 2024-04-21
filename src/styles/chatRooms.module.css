@@ -1,0 +1,35 @@
+.chatRooms {
+    width: 40%;
+    margin-left: 30%;
+    margin-top: 50px;
+    
+    border: 1px solid gray;
+    padding: 10px;
+    font-family: 'Pretendard';
+}
+
+.chatRoom {
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.chatRoom:hover {
+    background-color: rgb(200, 200, 200, 0.5);
+    transition: 0.3s;
+}
+
+.count {
+    background-color: rgb(245, 0, 0);
+    border-radius: 30px;
+    color: white;
+    
+    width: 18px;
+    height: 18px;
+
+    padding: 5px;
+    text-align: center;
+    margin-left: 18px;
+}

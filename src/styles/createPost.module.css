@@ -1,0 +1,73 @@
+.postContainer {
+    border: 1px solid gray;
+    width: 50%;
+
+    margin-left: 25%;
+    margin-top: 50px;
+    padding: 30px;
+
+    position: relative;
+
+    font-family: 'Pretendard';
+}
+
+.title {
+    border: transparent;
+    border-bottom: 1px solid black;
+    padding: 15px;
+    width: 50%;
+    text-indent: 15px;
+    font-size: 30px;
+    margin-bottom: 50px;
+}
+
+select {
+    border: 1px solid gray;
+    border-radius: 5px;
+    width: 100px;
+    height: 30px;
+    margin-bottom: 15px;
+    margin-right: 25px;
+}
+
+.createBtn {
+    border: 1px solid gray;
+    background-color: transparent;
+    width: 100px;
+    height: 35px;
+
+    position: absolute;
+    bottom: 15px;
+    right: 30px;
+}
+
+.createBtn:hover,
+.optionBtn:hover
+{
+    background-color: rgb(45, 45, 45);
+    color: white;
+    transition: 0.5s;
+}
+
+.dateTimeInput {
+    border: 1px solid gray;
+    margin-bottom: 15px;
+    padding: 6px;
+}
+
+.optionContainer {
+    display: flex;
+    margin-top: 15px;
+}
+
+.optionBtn, .selectedOption {
+    border: 1px solid gray;
+    background-color: transparent;
+    width: 100px;
+    height: 35px;
+}
+
+.selectedOption {
+    background-color: black;
+    color: white;
+}

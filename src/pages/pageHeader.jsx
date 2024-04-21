@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import Region from "./regionInput";
 
 const Title = styled.h1`
   font-family: "WAGURI";
@@ -24,7 +26,14 @@ const HeaderContainer = styled.div`
 `;
 
 export default function Header(props) {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [category, setCategory] = useState(false);
+
+  const handleCreatePost = () => {
+    const createPath = `${location.pathname}/create`;
+    navigate(createPath);
+  };
 
   return (
     <>
@@ -37,19 +46,20 @@ export default function Header(props) {
         >
           {props.category && props.category}
         </p>
-        {category && <Category setCategory={setCategory} />}
+        {category && <Category setCategory={setCategory} setSelectCategory={props.setSelectCategory}/>}
         {props.orderBy && <OrderBy handleOrderByChange={props.handleOrderByChange} orderBy={props.OrderBy} />}
-        {props.create && <CreatePost/>}
+        {props.create && <CreatePost handleCreatePost={handleCreatePost}/>}
+        {props.region && <div className={style.region}><Region/></div>}
         {props.search && <SearchInput />}
       </HeaderContainer>
     </>
   );
 }
 
-function CreatePost() {
+function CreatePost({ handleCreatePost }) {
   return (
     <>
-      <p className={style.create}>게시물 작성하기</p>
+      <p className={style.create} onClick={handleCreatePost}>게시물 작성하기</p>
     </>
   )
 }
@@ -82,24 +92,32 @@ function OrderBy({ handleOrderByChange, orderBy }) {
   );
 }
 
-function Category(props) {
+function Category({ setSelectCategory, setCategory }) {
+
+  const handleCategoryChange = (category) => {
+    setSelectCategory(category);
+  };
+
   return (
     <>
       <div
         className={style.categoryList}
-        onMouseEnter={() => props.setCategory(true)}
-        onMouseLeave={() => props.setCategory(false)}
+        onMouseEnter={() => setCategory(true)}
+        onMouseLeave={() => setCategory(false)}
       >
-        <button style={{ marginLeft: "110px" }}>한식</button>
-        <button>양식</button>
-        <button>중식</button>
-        <button>일식</button>
-        <button>야식</button>
-        <button>분식</button>
-        <button>카페</button>
-        <button style={{ width: "80px" }}>아시아음식</button>
-        <button style={{ width: "80px" }}>베이커리</button>
-        <button style={{ width: "80px" }}>패스트푸드</button>
+        <button
+          style={{ marginLeft: "110px" }}
+          onClick={() => handleCategoryChange('Korean')}
+        > 한식 </button>
+        <button onClick={() => handleCategoryChange('Western')}>양식</button>
+        <button onClick={() => handleCategoryChange('Chinese')}>중식</button>
+        <button onClick={() => handleCategoryChange('Japanese')}>일식</button>
+        <button onClick={() => handleCategoryChange('NightFood')}>야식</button>
+        <button onClick={() => handleCategoryChange('Snack')}>분식</button>
+        <button onClick={() => handleCategoryChange('meat')}>고기</button>
+        <button onClick={() => handleCategoryChange('Dessert')}>디저트</button>
+        <button style={{ width: "80px" }} onClick={() => handleCategoryChange('Asian')}>아시아음식</button>
+        <button style={{ width: "80px" }} onClick={() => handleCategoryChange('FastFood')}>패스트푸드</button>
       </div>
     </>
   );

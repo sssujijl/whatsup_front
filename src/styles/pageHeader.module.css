@@ -36,7 +36,7 @@
 
 .orderBy {
     position: absolute;
-    right: 530px;
+    right: 30%;
     top: 170px;
     border: 1px solid gray;
     padding: 5px;
@@ -44,7 +44,7 @@
 
 .create {
     position: absolute;
-    right: 400px;
+    right: 23%;
     top: 157px;
 
     border: 1px solid gray;
@@ -94,4 +94,10 @@
     background-color: rgba(200, 200, 200, 0.5);
     border: 1px solid gray;
     font-weight: bold;
+}
+
+.region {
+    position: absolute;
+    left: 28%;
+    top: 170px;
 }

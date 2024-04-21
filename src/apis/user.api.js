@@ -4,6 +4,7 @@ export default class UserAPI {
 
     static async signUp(data) {
         try {
+            console.log(data);
             const response = await axios.post('/users/signup', data);
             return response.data;
         } catch (error) {
@@ -33,7 +34,10 @@ export default class UserAPI {
 
     static async signin(data) {
         try {
-            const response = await axios.post('/users/signin', data);
+            const response = await axios.post('/users/signin', data, {
+                withCredentials: true,
+            });
+            console.log(response)
             return response.data;
         } catch (error) {
             console.error(error);

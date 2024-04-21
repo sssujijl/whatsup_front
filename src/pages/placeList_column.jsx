@@ -12,6 +12,11 @@ const FlexDiv = styled.div`
 `;
 
 export default function PlaceList(props) {
+  const [address, setAddress] = useState(false);
+
+  const toggleAddress = (index) => {
+    setAddress(address === index ? null : index);
+  };
 
   return (
     <>
@@ -29,7 +34,7 @@ export default function PlaceList(props) {
         <h2 style={{ marginLeft: "30px", marginTop: "50px", color:'gray'}}>
           {props.userAddress}
         </h2>
-        {props.places &&
+        {props.places && !props.selectPlace &&
           props.places.slice(0, 10).map((place, index) => (
             <div className={style.place} key={index}>
               <FlexDiv>
@@ -42,22 +47,28 @@ export default function PlaceList(props) {
               <FlexDiv style={{ position: "relative", bottom: "15px" }}>
                 <p className={style.place_review}>{`리뷰 ${place.reviews.length}`}</p>
                 <div className={style.place_addressContainer}>
-                  <p className={style.place_address}>{place.address}</p>
-                  <button className={style.place_addressBtn}>
+                  <p className={style.place_address}>{place.address.match(/(.*?(동|리))/)[1]}</p>
+                  <button className={style.place_addressBtn} onClick={() => toggleAddress(index)}>
                     <FontAwesomeIcon icon={faChevronDown} />
                   </button>
                 </div>
               </FlexDiv>
-              {/* {
-                place.image && 
-                <div className={style.imgs}>
-                  <img src={place.image} alt="음식" />
-                </div>
-              } */}
-              
+              {address === index && <Address address={place.address} roadAddress={place.roadAddress}/>}
             </div>
           ))}
       </div>
     </>
   );
+}
+
+function Address({address, roadAddress}) {
+  return (
+    <>
+      <div className={style.address}>
+        <p>지번주소 : {address}</p>
+        <hr/>
+        <p>도로명주소 : {roadAddress}</p>
+      </div>
+    </>
+  )
 }
