@@ -8,6 +8,7 @@ import axios from 'axios';
 import { CookiesProvider } from 'react-cookie';
 
 axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.withCredentials = true;
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

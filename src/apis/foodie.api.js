@@ -16,4 +16,18 @@ export default class FoodieAPI {
             throw error;
         }
     }
+
+    static async createFoodie(data, accessToken) {
+        try {
+            const response = await axios.post('/foodies', data, { 
+                headers: {
+                    Cookie: accessToken
+                },
+            });
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
 }

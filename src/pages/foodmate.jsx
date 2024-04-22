@@ -13,6 +13,7 @@ export default function FoodMate() {
         async function findAllFoodMates(orderBy) {
             try {
                 const foodMates = await FoodMateAPI.findAllFoodMates({orderBy, selectCategory});
+                console.log(foodMates);
                 if (!foodMates.message) {
                     setFoodMates(foodMates);
                 } else {

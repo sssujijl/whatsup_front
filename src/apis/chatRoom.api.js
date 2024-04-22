@@ -1,14 +1,12 @@
 import axios from 'axios';
 
-export default class FoodMateAPI {
-
-    static async findAllFoodMates(data) {
+export default class ChatRoomAPI {
+    static async createChatRoom(data, accessToken) {
         try {
-            const response = await axios.get('/foodmates', { 
-                params: { 
-                    orderBy: data.orderBy,
-                    category: data.selectCategory
-                } 
+            const response = await axios.post('/chat-rooms', data, { 
+                headers: {
+                    Cookie: accessToken
+                },
             });
             return response.data;
         } catch (error) {
@@ -17,9 +15,9 @@ export default class FoodMateAPI {
         }
     }
 
-    static async createFoodMate(data, accessToken) {
+    static async findAllMessage(chatRoomId, accessToken) {
         try {
-            const response = await axios.post('/foodmates', data, { 
+            const response = await axios.get(`/chatRoom/${chatRoomId}/messages`, { 
                 headers: {
                     Cookie: accessToken
                 },

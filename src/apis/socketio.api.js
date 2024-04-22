@@ -9,7 +9,8 @@ class SocketService {
 
   connectWithAuthToken(token) {
     this.socket.auth = { token };
-    this.socket.connect();
+    const test = this.socket.connect();
+    console.log(test);
   }
 
   disconnect() {
@@ -17,6 +18,7 @@ class SocketService {
   }
 
   sendMessage(data) {
+    console.log(data);
     this.socket.emit("message", data);
   }
 

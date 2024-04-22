@@ -1,39 +1,70 @@
 import style from "../styles/chatRoom.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import io from "socket.io-client";
+import { Cookies } from "react-cookie";
+import { useParams } from "react-router-dom";
+import ChatRoomAPI from "../apis/chatRoom.api";
 
 export default function ChatRoom() {
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
   const [socket, setSocket] = useState(null);
+  const [check, setCheck] = useState(true);
+  const { id } = useParams();
+  const cookies = new Cookies();
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
-    const newSocket = io("http://localhost:8080");
+    const newSocket = io("http://localhost:8080", {
+      auth: {
+        token: cookies.get("accessToken"),
+      },
+    });
     setSocket(newSocket);
 
-    // 클라이언트에서 필요한 WebSocket 이벤트 리스너 등록
     newSocket.on("connect", () => {
       console.log("Connected to server");
     });
 
-    // 서버로부터 메시지를 받으면 messages 상태를 업데이트합니다.
     newSocket.on("message", (message) => {
+      console.log(message);
       setMessages((prevMessages) => [...prevMessages, message]);
     });
 
-    // 컴포넌트 언마운트 시 소켓 연결을 해제합니다.
     return () => {
       newSocket.disconnect();
     };
   }, []);
 
-  // 입력한 메시지를 서버로 전송하는 함수
   const sendMessage = () => {
     if (socket && inputMessage.trim() !== "") {
-      socket.emit("sendMessage", inputMessage);
+      const data = {
+        chatRoomId: id,
+        message: inputMessage,
+      };
+      socket.emit("message", data);
+      setCheck(true);
       setInputMessage("");
     }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const message = await ChatRoomAPI.findAllMessage(
+          id,
+          cookies.get("accessToken")
+        );
+        setCheck(false);
+        setMessages(message);
+
+        messagesEndRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, [check]);
 
   return (
     <>
@@ -41,22 +72,23 @@ export default function ChatRoom() {
         <div className={style.messages}>
           {messages.map((message, index) => (
             <div key={index}>
-              {message.sender ? (
+              {message.userId === "me" ? (
                 <div className={style.sender}>
-                  <p className={style.dateTime}>{message.timestamp}</p>
-                  <p className={style.message}>{message.text}</p>
+                  <p className={style.dateTime}>{message.currentTime}</p>
+                  <p className={style.message}>{message.message}</p>
                 </div>
               ) : (
                 <div className={style.receiver}>
-                  <span style={{ fontWeight: "bold" }}>김성진</span>
+                  <span className={style.nickName}>{message.nickName}</span>
                   <div style={{ display: "flex" }}>
-                    <p className={style.message}>{message.text}</p>
-                    <p className={style.dateTime}>수신시간</p>
+                    <p className={style.message}>{message.message}</p>
+                    <p className={style.dateTime}>{message.currentTime}</p>
                   </div>
                 </div>
               )}
             </div>
           ))}
+          <div ref={messagesEndRef} />
         </div>
         <div className={style.sendContainer}>
           <input
