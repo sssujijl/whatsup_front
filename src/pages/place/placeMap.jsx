@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import style from '../styles/map.module.css'
+import style from '../../styles/map.module.css'
 
 export default function PlaceMap(props) {
   const { naver } = window;

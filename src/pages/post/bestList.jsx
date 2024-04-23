@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import style from '../styles/bestList.module.css'
+import style from '../../styles/bestList.module.css'
 
 const BestViews = styled.div`
 width: 60%;

@@ -1,4 +1,4 @@
-import style from "../styles/pageHeader.module.css";
+import style from "../../styles/pageHeader.module.css";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
@@ -18,7 +18,6 @@ const HeaderContainer = styled.div`
   display: flex;
 
   font-family: "Pretendard";
-  width: 100%;
 
   position: relative;
   margin-bottom: ${({ marginBottom }) => marginBottom || 0}px;
@@ -49,7 +48,7 @@ export default function Header(props) {
         {category && <Category setCategory={setCategory} setSelectCategory={props.setSelectCategory}/>}
         {props.orderBy && <OrderBy handleOrderByChange={props.handleOrderByChange} orderBy={props.OrderBy} />}
         {props.create && <CreatePost handleCreatePost={handleCreatePost}/>}
-        {props.region && <div className={style.region}><Region/></div>}
+        {props.region && <div className={style.region}><Region setRegion={props.setRegion}/></div>}
         {props.search && <SearchInput />}
       </HeaderContainer>
     </>
@@ -114,7 +113,7 @@ function Category({ setSelectCategory, setCategory }) {
         <button onClick={() => handleCategoryChange('Japanese')}>일식</button>
         <button onClick={() => handleCategoryChange('NightFood')}>야식</button>
         <button onClick={() => handleCategoryChange('Snack')}>분식</button>
-        <button onClick={() => handleCategoryChange('meat')}>고기</button>
+        <button onClick={() => handleCategoryChange('Meat')}>고기</button>
         <button onClick={() => handleCategoryChange('Dessert')}>디저트</button>
         <button style={{ width: "80px" }} onClick={() => handleCategoryChange('Asian')}>아시아음식</button>
         <button style={{ width: "80px" }} onClick={() => handleCategoryChange('FastFood')}>패스트푸드</button>

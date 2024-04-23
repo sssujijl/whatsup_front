@@ -6,11 +6,10 @@
     position: relative;
     top: 45px;
 }
-
 .missionContainer {
     width: 70%;
-    margin-left: 15%;
-}
+    margin: 0 auto;
+  }
 
 .missionTitle {
     font-family: 'Pretendard';

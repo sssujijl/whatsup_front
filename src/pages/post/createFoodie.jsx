@@ -1,6 +1,6 @@
 import CreatePost from './createPost'
 import { useEffect, useState } from 'react';
-import FoodieAPI from '../apis/foodie.api';
+import FoodieAPI from '../../apis/foodie.api';
 import { Cookies } from 'react-cookie';
 import { useNavigate } from "react-router-dom";
 

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import style from "../styles/signup.module.css";
+import style from "../../styles/signup.module.css";
 import { useEffect, useState } from "react";
-import UserAPI from "../apis/user.api";
+import UserAPI from "../../apis/user.api";
 import { useNavigate } from "react-router-dom";
 
 const Title = styled.h2`
@@ -110,7 +110,6 @@ export default function Signup() {
 
   return (
     <>
-    <button onClick={() => {console.log('버튼 누름'); setIsVerified(true)}}>누르세요</button>
       <div className={style.container}>
         <Title>이메일 회원가입</Title>
         <h4>이름</h4>

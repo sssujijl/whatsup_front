@@ -1,9 +1,9 @@
-import style from '../styles/login.module.css'
-import naver from '../img/btnG_아이콘원형.png'
-import kakao from '../img/kakao_login.png'
-import google from '../img/web_neutral_rd_na@4x.png'
-import UserAPI from '../apis/user.api'
-import GoogleLoginButton from './googleLogin'
+import style from '../../styles/login.module.css'
+import naver from '../../img/btnG_아이콘원형.png'
+import kakao from '../../img/kakao_login.png'
+import google from '../../img/web_neutral_rd_na@4x.png'
+import UserAPI from '../../apis/user.api'
+import GoogleLoginButton from '../googleLogin'
 import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 
@@ -19,7 +19,7 @@ export default function Login(props) {
             const formData = {email, password};
             const user = await UserAPI.signin(formData);
             if (!user.message) {
-                navigate('/');
+                window.location.replace('/');
             } else {
                 alert(user.message)
             }

@@ -1,4 +1,4 @@
-import Header from './pageHeader';
+import Header from '../layout/pageHeader';
 import PlaceList from './placeList_row';
 
 export default function Places() {

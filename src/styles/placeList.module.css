@@ -1,12 +1,9 @@
 .centerContainer {
     width: 70%;
     height: 385px;
-
-    margin-top: 150px;
-    margin-left: 15%;
-
+    margin: 150px auto;
     font-family: 'Pretendard';
-}
+  }
 
 .centerContainer h3 {
     color: gray;

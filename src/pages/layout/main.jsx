@@ -1,7 +1,7 @@
-import style from '../styles/main.module.css'
+import style from '../../styles/main.module.css'
 import Header from './pageHeader';
-import PlaceList from './placeList_row';
-import MissionAPI from '../apis/mission.api';
+import PlaceList from '../place/placeList_row';
+import MissionAPI from '../../apis/mission.api'
 import { useState, useEffect } from 'react';
 
 export default function Main() {

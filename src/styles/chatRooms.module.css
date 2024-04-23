@@ -1,11 +1,14 @@
 .chatRooms {
     width: 40%;
+    height: 700px;
     margin-left: 30%;
     margin-top: 50px;
+    margin-bottom: 150px;
     
     border: 1px solid gray;
     padding: 10px;
     font-family: 'Pretendard';
+    position: relative;
 }
 
 .chatRoom {

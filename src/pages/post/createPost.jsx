@@ -1,9 +1,9 @@
-import style from "../styles/createPost.module.css";
+import style from "../../styles/createPost.module.css";
 import { useState, useEffect } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import PlaceAPI from "../apis/place.api";
-import Region from "./regionInput";
+import PlaceAPI from "../../apis/place.api";
+import Region from "../layout/regionInput";
 
 export default function CreatePost(props) {
   const [option, setOption] = useState(false);

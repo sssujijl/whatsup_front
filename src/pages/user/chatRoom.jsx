@@ -1,18 +1,37 @@
-import style from "../styles/chatRoom.module.css";
+import style from "../../styles/chatRoom.module.css";
 import { useEffect, useState, useRef } from "react";
 import io from "socket.io-client";
 import { Cookies } from "react-cookie";
 import { useParams } from "react-router-dom";
-import ChatRoomAPI from "../apis/chatRoom.api";
+import ChatRoomAPI from "../../apis/chatRoom.api";
+import UserAPI from "../../apis/user.api";
+import { format } from "date-fns";
 
 export default function ChatRoom() {
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
   const [socket, setSocket] = useState(null);
-  const [check, setCheck] = useState(true);
   const { id } = useParams();
   const cookies = new Cookies();
-  const messagesEndRef = useRef(null);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    document.getElementById('chatContainer').scrollTop = document.getElementById('chatContainer').scrollHeight
+  }, [messages])
+
+  useEffect(() => {
+    async function fetechData() {
+      try {
+        const accessToken = cookies.get("accessToken");
+        const user = await UserAPI.getUser(accessToken);
+        setUser(user);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    fetechData();
+  }, []);
 
   useEffect(() => {
     const newSocket = io("http://localhost:8080", {
@@ -25,10 +44,10 @@ export default function ChatRoom() {
     newSocket.on("connect", () => {
       console.log("Connected to server");
     });
-
-    newSocket.on("message", (message) => {
-      console.log(message);
-      setMessages((prevMessages) => [...prevMessages, message]);
+  
+    newSocket.on(`message: ${id}`, (res) => {
+      res.currentTime = format(new Date(res.currentTime), 'a hh:mm')
+      setMessages((prevState) => prevState.concat(res));
     });
 
     return () => {
@@ -36,14 +55,16 @@ export default function ChatRoom() {
     };
   }, []);
 
-  const sendMessage = () => {
+  const sendMessage = (event) => {
+    event.preventDefault()
     if (socket && inputMessage.trim() !== "") {
       const data = {
         chatRoomId: id,
         message: inputMessage,
       };
-      socket.emit("message", data);
-      setCheck(true);
+      socket.emit("message", data, (res) => {
+        console.log('sendMessage res', res);
+      });
       setInputMessage("");
     }
   };
@@ -55,24 +76,23 @@ export default function ChatRoom() {
           id,
           cookies.get("accessToken")
         );
-        setCheck(false);
         setMessages(message);
-
-        messagesEndRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+          console.log(message);
+        
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
-  }, [check]);
+  }, []);
 
   return (
     <>
       <div className={style.chatRoom}>
-        <div className={style.messages}>
+        <div id="chatContainer" className={style.messages}>
           {messages.map((message, index) => (
             <div key={index}>
-              {message.userId === "me" ? (
+              {message.userId === user.id ? (
                 <div className={style.sender}>
                   <p className={style.dateTime}>{message.currentTime}</p>
                   <p className={style.message}>{message.message}</p>
@@ -88,7 +108,6 @@ export default function ChatRoom() {
               )}
             </div>
           ))}
-          <div ref={messagesEndRef} />
         </div>
         <div className={style.sendContainer}>
           <input

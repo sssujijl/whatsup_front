@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import style from "../styles/placeList-column.module.css";
+import style from "../../styles/placeList-column.module.css";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import PlaceAPI from "../apis/place.api";
+import PlaceAPI from "../../apis/place.api";
 
 const FlexDiv = styled.div`
   display: flex;

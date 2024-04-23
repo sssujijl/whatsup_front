@@ -9,12 +9,13 @@
 }
 
 .messages {
-    max-height: 550px;
+    height: 550px;
     border: 1px solid gray;
 
     padding: 20px;
     overflow: scroll;
     scrollbar-width: thin;
+    scroll-behavior: smooth;
 }
 
 .messages::-webkit-scrollbar {

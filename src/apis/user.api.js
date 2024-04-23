@@ -45,9 +45,27 @@ export default class UserAPI {
         }
     }
 
-    static async getUser() {
+    static async getUser(accessToken, password) {
         try {
-            const response = await axios.get('/users/checkVerification');
+            const response = await axios.post('/users/info', { password }, {
+                headers: {
+                    Cookie: accessToken
+                }
+            });
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+    
+    static async getUserInfo(accessToken) {
+        try {
+            const response = await axios.get('/users/info', {
+                headers: {
+                    Cookie: accessToken
+                }
+            });
             return response.data;
         } catch (error) {
             console.error(error);
@@ -55,9 +73,28 @@ export default class UserAPI {
         }
     }
 
-    static async secession(data) {
+    static async top3Title(accessToken) {
         try {
-            const response = await axios.delete('/users', data);
+            const response = await axios.get('/titles/top3', {
+                headers: {
+                    Cookie: accessToken
+                }
+            });
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    static async secession(accessToken, password) {
+        try {
+            const response = await axios.delete('/users', { password }, {
+                headers: {
+                    Cookie: accessToken
+                }
+            })
+            
             return response.data;
         } catch (error) {
             console.error(error);

@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import style from '../styles/map.module.css'
-import Header from './pageHeader'
+import style from '../../styles/map.module.css'
+import Header from '../layout/pageHeader'
 import PlaceList from './placeList_column';
-import PlaceAPI from '../apis/place.api';
+import PlaceAPI from '../../apis/place.api';
 import PlaceMap from './placeMap';
 
 export default function Map() {

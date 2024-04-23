@@ -1,4 +1,4 @@
-import style from '../styles/placeList.module.css'
+import style from '../../styles/placeList.module.css'
 
 export default function PlaceList(props) {
     return (

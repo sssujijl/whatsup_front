@@ -7,7 +7,8 @@ export default class FoodMateAPI {
             const response = await axios.get('/foodmates', { 
                 params: { 
                     orderBy: data.orderBy,
-                    category: data.selectCategory
+                    category: data.selectCategory,
+                    region: data.region
                 } 
             });
             return response.data;

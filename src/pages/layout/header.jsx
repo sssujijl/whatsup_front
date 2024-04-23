@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import style from '../styles/header.module.css'
+import style from '../../styles/header.module.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComments, faUser } from '@fortawesome/free-solid-svg-icons'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, navigate } from "react-router-dom";
 import { Cookies } from "react-cookie";
 import { useState, useEffect } from "react";
 
@@ -78,7 +78,7 @@ function Sign({navigate}) {
 function User({navigate}) {
     return (
         <>
-          <p className={style.chat} onClick={() => { navigate('/chatRooms') }}><FontAwesomeIcon icon={faComments}></FontAwesomeIcon></p>
+          <p className={style.chat} onClick={() => { navigate('/chatRoom') }}><FontAwesomeIcon icon={faComments}></FontAwesomeIcon></p>
           <p className={style.user} onClick={() => { navigate('/user') }}><FontAwesomeIcon icon={faUser}/></p>
         </>
     )

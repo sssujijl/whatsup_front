@@ -2,7 +2,7 @@ import CreatePost from "./createPost";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Cookies } from 'react-cookie';
-import FoodMateAPI from '../apis/foodMate.api'
+import FoodMateAPI from '../../apis/foodMate.api'
 
 export default function CreateFoodMate () {
     const [title, setTitle] = useState("");
