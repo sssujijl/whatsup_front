@@ -156,7 +156,6 @@ export default class UserAPI {
 
   static async tossFind(accessToken, paymentKey) {
     try {
-      console.log(`/points/toss/${paymentKey}`);
       const response = await axios.get(`/points/toss/${paymentKey}`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -180,7 +179,6 @@ export default class UserAPI {
 
   static async tossCancel(accessToken, data, paymentKey) {
     try {
-      console.log(`/points/toss/${paymentKey}/cancel`);
       const response = await axios.post(
         `/points/toss/${paymentKey}/cancel`,
         data,
