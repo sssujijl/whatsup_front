@@ -12,6 +12,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@tosspayments/payment-widget-sdk": "^0.10.2",
     "axios": "^1.6.8",
     "date-fns": "^3.6.0",
     "dotenv": "^16.4.5",
@@ -27,7 +28,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "export PORT=4000 && react-scripts start",
+    "start": "cross-env PORT=4000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -51,6 +52,7 @@
     ]
   },
   "devDependencies": {
-    "@types/navermaps": "^3.7.5"
+    "@types/navermaps": "^3.7.5",
+    "cross-env": "^7.0.3"
   }
 }

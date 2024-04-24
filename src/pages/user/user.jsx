@@ -12,8 +12,8 @@ import MyReviews from "./userComponent/MyReviews"
 
 export default function User() {
   const cookies = new Cookies();
-  const [userInfo, setUserInfo] = useState("");
-  const [top3Title, setTop3Title] = useState("");
+  const [userInfo, setUserInfo] = useState([]);
+  const [top3Title, setTop3Title] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {

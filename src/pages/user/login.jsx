@@ -1,5 +1,5 @@
 import style from '../../styles/login.module.css'
-import naver from '../../img/btnG_아이콘원형.png'
+import naver from '../../img/btnG_아이콘원형.png'
 import kakao from '../../img/kakao_login.png'
 import google from '../../img/web_neutral_rd_na@4x.png'
 import UserAPI from '../../apis/user.api'
