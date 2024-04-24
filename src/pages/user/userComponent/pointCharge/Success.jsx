@@ -7,7 +7,7 @@ import UserAPI from "../../../../apis/user.api";
 export function SuccessPage() {
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [isCanceled, setIsCanceled] = useState(false);
-  const [isFinded, setIsFinded] = useState(false);
+  const [isFound, setIsFound] = useState(false);
   const [paymentInfo, setPaymentInfo] = useState(null);
   const [searchParams] = useSearchParams();
   const paymentKey = searchParams.get("paymentKey");
@@ -57,7 +57,7 @@ export function SuccessPage() {
       const response = await UserAPI.tossFind(accessToken, paymentKey);
 
       if (response) {
-        setIsFinded(true);
+        setIsFound(true);
         setPaymentInfo(response);
       } else {
         console.error("API 호출 실패:", response.statusText);
@@ -81,7 +81,7 @@ export function SuccessPage() {
           />
           <h2 className={style.title}>결제가 성공적으로 취소되었어요.</h2>
         </div>
-      ) :  isFinded ? (
+      ) :  isFound ? (
         <div
           className={`${style.flexColumn} ${style.alignCenter} ${style.confirmSuccess} ${style.w100} ${style.maxW540}`}
         >

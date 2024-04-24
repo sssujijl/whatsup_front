@@ -1,13 +1,13 @@
 import UserAPI from "../../../../apis/user.api";
 import { Cookies } from "react-cookie";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { loadPaymentWidget, ANONYMOUS } from "@tosspayments/payment-widget-sdk";
 import style from "../../../../styles/toss.module.css"; 
 
 const generateRandomString = () => window.btoa(Math.random()).slice(0, 20);
 
 export function CheckoutPage() {
-  const cookies = new Cookies();
+  const cookies = useMemo(() => new Cookies(), []); 
   const paymentWidgetRef = useRef(null);
   const paymentMethodsWidgetRef = useRef(null);
   const agreementWidgetRef = useRef(null);
@@ -26,7 +26,7 @@ export function CheckoutPage() {
     }
 
     fetchData();
-  },);
+  },[cookies]);
 
   useEffect(() => {
     (async () => {

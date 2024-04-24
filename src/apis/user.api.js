@@ -147,7 +147,6 @@ export default class UserAPI {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      console.log("여기는 프론트: ", response.status);
       return response.status === 201 ? true : false;
     } catch (error) {
       console.error(error);
@@ -163,7 +162,6 @@ export default class UserAPI {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      console.log("여기는 프론트", response);
       const { orderName, totalAmount, method, approvedAt } = response.data;
 
       const responseData = {
