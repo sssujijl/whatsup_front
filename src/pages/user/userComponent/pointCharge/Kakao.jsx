@@ -66,7 +66,7 @@ export function KakaoPay() {
     const merchant_uid = generateMerchantUID();
 
     IMP.request_pay({
-      pg: 'kakaopay.TC0ONETIME',
+      pg: `kakaopay.${process.env.REACT_APP_KAKAOPAY_CID}`,
       merchant_uid: merchant_uid,
       name: '왔쩝 포인트',
       amount: price,
