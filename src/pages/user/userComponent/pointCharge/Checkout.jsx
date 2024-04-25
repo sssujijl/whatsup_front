@@ -6,6 +6,7 @@ import style from "../../../../styles/toss.module.css";
 
 const generateRandomString = () => window.btoa(Math.random()).slice(0, 20);
 
+//SECTION - Checkout, Success, Fail은 토스페이
 export function CheckoutPage() {
   const cookies = useMemo(() => new Cookies(), []); 
   const paymentWidgetRef = useRef(null);
@@ -83,7 +84,7 @@ export function CheckoutPage() {
                  */
                 await paymentWidget?.requestPayment({
                   orderId: generateRandomString(),
-                  orderName: "와쩝 포인트",
+                  orderName: "왔쩝 포인트",
                   customerName: userInfo.nickName,
                   customerEmail: userInfo.email,
                   amount: price,
@@ -91,7 +92,7 @@ export function CheckoutPage() {
                   failUrl: window.location.origin + "/user/toss/fail" + window.location.search
                 });
               } catch (error) {
-                // TODO: 에러 처리
+                console.error("결제 중 오류 발생:", error);
               }
             }}
           >

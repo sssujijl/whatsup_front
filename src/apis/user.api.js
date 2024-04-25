@@ -194,4 +194,36 @@ export default class UserAPI {
       throw error;
     }
   }
+
+  static async updatePoint(accessToken, amount) {
+    try {
+      const data = { amount: amount };
+      const response = await axios.post(`/points`, data, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      if (response.data.statusCode === 200) {
+        return response.data.pointNow;
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
+  static async cancelPayment(accessToken, merchant_uid) {
+    try {
+      const data = { merchant_uid: merchant_uid };
+      const response = await axios.post("/points/kakao/cancel", data, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      return response.data.code === 0 ? true : false;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
 }

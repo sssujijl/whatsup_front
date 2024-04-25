@@ -20,6 +20,7 @@ import Footer from "./pages/layout/footer";
 import { CheckoutPage } from "./pages/user/userComponent/pointCharge/Checkout";
 import { SuccessPage } from "./pages/user/userComponent/pointCharge/Success";
 import { FailPage } from "./pages/user/userComponent/pointCharge/Fail";
+import { KakaoPay } from "./pages/user/userComponent/pointCharge/Kakao";
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
         <Route path="/user/toss" element={<CheckoutPage />} />
         <Route path="/user/toss/success" element={<SuccessPage />} />
         <Route path="/user/toss/fail" element={<FailPage />} />
+        <Route path="/user/kakao" element={<KakaoPay />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
