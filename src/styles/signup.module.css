@@ -1,12 +1,11 @@
 .container {
     width: 36%;
 
-    margin-left: 32%;
-    margin-top: 50px;
+    margin: 50px auto 150px;
 
     border: 1px solid gray;
 
-    position: absolute;
+    position: relative;
     font-family: 'Pretendard';
 }
 

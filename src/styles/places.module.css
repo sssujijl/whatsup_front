@@ -1,0 +1,58 @@
+.mainContainer {
+    font-family: 'Pretendard';
+    width: 60%;
+    height: 1200px;
+    margin: 100px auto;
+    position: relative;
+}
+
+.contents {
+    border-bottom: 0.1px solid gray;
+
+    width: 70%;
+    margin: 10px auto;
+    padding: 15px;
+}
+
+.place_title {
+    position: relative;
+    left: 20px;
+    width: auto;
+}
+
+.place_category {
+    color: gray;
+    font-size: 15px;
+
+    position: relative;
+    left: 40px;
+    top: 8px;
+}
+
+.place_star {
+    width: 30px;
+    height: 30px;
+
+    border: transparent;
+    background-color: transparent;
+
+    font-size: 20px;
+    color: rgb(0, 0, 0, 0.5);
+    margin-left: auto;
+}
+
+.place_status {
+    width: 50px;
+
+    margin-left: 40px;
+}
+
+.place_review {
+    margin-left: 25px;
+}
+
+.place_addressContainer {
+    display: flex;
+
+    margin-left: 25px;
+}

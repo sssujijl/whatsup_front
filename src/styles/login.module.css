@@ -2,16 +2,13 @@
     width: 30%;
     height: 500px;
 
-    margin-left: 35%;
-    margin-top: 50px;
+    margin: 50px auto 150px;
 
     border: 1px solid grey;
 
     font-family: 'Pretendard';
 
-    position: absolute;
-
-    z-index: 2;
+    position: relative;
 }
 
 .container input {

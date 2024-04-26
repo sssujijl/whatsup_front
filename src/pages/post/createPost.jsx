@@ -12,8 +12,14 @@ export default function CreatePost(props) {
   useEffect(() => {
     const fetechDate = async () => {
       try {
-        const category = await PlaceAPI.findAllFoodCategory();
-        setFoodCategory(category);
+        const res = await PlaceAPI.findAllFoodCategory();
+
+        if (res.statusText === "OK") {
+          setFoodCategory(res.data.data);
+        } else {
+          alert(res.message);
+        }
+        
       } catch (err) {
         console.log(err);
       }
@@ -32,7 +38,10 @@ export default function CreatePost(props) {
           onChange={(e) => props.setTitle(e.target.value)}
         />
         <div style={{ display: "flex", position: "relative" }}>
-          <FoodCategory setCategory={props.setCategory} foodCategory={foodCategory} />
+          <FoodCategory
+            setCategory={props.setCategory}
+            foodCategory={foodCategory}
+          />
           {props.foodie && <Level setLevel={props.setLevel} />}
           {props.foodMate && (
             <button
@@ -47,7 +56,7 @@ export default function CreatePost(props) {
         </div>
         {option && (
           <div className={style.optionContainer}>
-            <Region setRegion={props.setRegion}/>
+            <Region setRegion={props.setRegion} />
             <FoodMateOption
               setGender={props.setGender}
               setAge={props.setAge}
@@ -56,13 +65,17 @@ export default function CreatePost(props) {
             />
           </div>
         )}
-        <Quill content={props.content} setContent={props.setContent}/>
-        <button className={style.createBtn} onClick={() => props.handleCreate()}>작성하기</button>
+        <Quill content={props.content} setContent={props.setContent} />
+        <button
+          className={style.createBtn}
+          onClick={() => props.handleCreate()}
+        >
+          작성하기
+        </button>
       </div>
     </>
   );
 }
-
 
 function FoodMateOption(props) {
   const capacityOptions = [];
@@ -89,17 +102,20 @@ function FoodMateOption(props) {
     <>
       <div></div>
       <select onChange={(e) => props.setGender(e.target.value)}>
+        <option value="">성별 선택</option>
         <option value="Gender_neutral">성별무관</option>
         <option value="M">남자만</option>
         <option value="F">여자만</option>
       </select>
       <select onChange={(e) => props.setAge(e.target.value)}>
+        <option value="">연령대 선택</option>
         <option key="age-any" value="age-any">
           나이대무관
         </option>
         {ageOptions}
       </select>
       <select onChange={(e) => props.setCapacity(e.target.value)}>
+        <option value="">인원수 선택</option>
         <option key="capacity-any" value="capacity-any">
           인원수무관
         </option>
@@ -120,13 +136,13 @@ function FoodCategory({ setCategory, foodCategory }) {
 
   const handleMainCategoryChange = (mainCategory) => {
     setSelectedMainCategory(mainCategory);
-    setSelectedSubCategory(""); // Resetting the sub-category selection when main category changes
-    setCategory(null); // Resetting the category selection
+    setSelectedSubCategory("");
+    setCategory(null);
   };
 
   const handleSubCategoryChange = (subCategory) => {
     setSelectedSubCategory(subCategory);
-    setCategory(subCategory); // Setting the category when sub-category is selected
+    setCategory(subCategory);
   };
 
   return (
@@ -171,6 +187,7 @@ function Level({ setLevel }) {
         className={style.level}
         onChange={(e) => setLevel(e.target.value)}
       >
+        <option value="">레벨 선택</option>
         <option value="입문">입문</option>
         <option value="초보">초보</option>
         <option value="중수">중수</option>

@@ -17,6 +17,7 @@ import CreateFoodMate from './pages/post/createFoodMate';
 import ChatRooms from "./pages/user/chatRooms";
 import ChatRoom from "./pages/user/chatRoom";
 import Footer from "./pages/layout/footer";
+import Post from "./pages/post/post";
 
 function App() {
   return (
@@ -31,12 +32,13 @@ function App() {
       <Route path="/foodie">
         <Route index element={<Foodie/>}/>
         <Route path="create" element={<CreateFoodie/>}/>
-        <Route path=":id" element={<ChatRoom/>}/>
+        <Route path=":id" element={<Post/>}/>
       </Route>
 
       <Route path="/foodMate">
         <Route index element={<FoodMate/>}/>
         <Route path="create" element={<CreateFoodMate/>}/>
+        <Route path=":id" element={<Post/>}/>
       </Route>
 
       <Route path="/chatRoom">
@@ -50,7 +52,7 @@ function App() {
 
       <Route path='*' element={<h1> 404 없는 페이지임 </h1>}></Route>
     </Routes>
-    <Footer/>
+    {/* <Footer/> */}
     </>
   );
 }

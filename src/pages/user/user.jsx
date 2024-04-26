@@ -6,24 +6,31 @@ import MyProfile from "./userComponent/MyProfile";
 import MyLists from "./userComponent/MyLists";
 import MyReservations from "./userComponent/MyReservations";
 import MyTitles from "./userComponent/MyTitles";
-import MyPoints from "./userComponent/MyPoints"
-import MyCoupons from "./userComponent/MyCoupons"
-import MyReviews from "./userComponent/MyReviews"
+import MyPoints from "./userComponent/MyPoints";
+// import MyCoupons from "./userComponent/MyCoupons"
+// import MyReviews from "./userComponent/MyReviews"
 
 export default function User() {
   const cookies = new Cookies();
-  const [userInfo, setUserInfo] = useState("");
-  const [top3Title, setTop3Title] = useState("");
+  const [userInfo, setUserInfo] = useState([]);
+  const [top3Title, setTop3Title] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
     async function fetechData() {
       try {
         const accessToken = cookies.get("accessToken");
-        const info = await UserAPI.getUserInfo(accessToken);
-        const top3 = await UserAPI.top3Title(accessToken);
-        setTop3Title(top3);
-        setUserInfo(info);
+        if (!accessToken) {
+          alert('사용자의 로그인 인증시간이 만료되었습니다.');
+          window.location.href = '/';
+        }
+        
+        const resUser = await UserAPI.getUserInfo(accessToken);
+        const resTitle = await UserAPI.top3Title(accessToken);
+        if (resUser.statusCode === 200 && resTitle.statusCode === 200) {
+          setTop3Title(resTitle.data);
+          setUserInfo(resUser.data);
+        }
       } catch (err) {
         console.log(err);
       }
@@ -59,7 +66,7 @@ export default function User() {
         </div>
         <div className={style.titles}>
           <h2>TOP 3 Title</h2>
-          {top3Title && top3Title.length > 0 ? (
+          {top3Title.length > 0 ? (
             top3Title.slice(0, 3).map((title, index) => (
               <p key={index}>
                 {index + 1}. {title.foodCategory.category}{" "}
@@ -73,25 +80,25 @@ export default function User() {
       </div>
       <div style={{ display: "flex" }}>
         <div className={style.sides}>
-          <p onClick={() => setSelectedItem("MyProfile")}>My Profile</p>
-          <p onClick={() => setSelectedItem("MyLists")}>My Lists</p>
+          <p onClick={() => setSelectedItem("MyProfile")}>Profile</p>
+          <p onClick={() => setSelectedItem("MyLists")}>PlaceLists</p>
           <p onClick={() => setSelectedItem("Reservations")}>Reservations</p>
           <p onClick={() => setSelectedItem("Titles")}>Titles</p>
           <p onClick={() => setSelectedItem("Points")}>Points</p>
-          <p onClick={() => setSelectedItem("Coupons")}>Coupons</p>
-          <p onClick={() => setSelectedItem("Reviews")}>Reviews</p>
+          {/* <p onClick={() => setSelectedItem("Coupons")}>Coupons</p>
+          <p onClick={() => setSelectedItem("Reviews")}>Reviews</p> */}
           <button className={style.logoutBtn} onClick={handleLogout}>
             로그아웃
           </button>
         </div>
-        {selectedItem === 'MyProfile' && <MyProfile/>}
-        {selectedItem === 'MyLists' && <MyLists/>}
-        {selectedItem === 'Reservations' && <MyReservations/>}
-        {selectedItem === 'Titles' && <MyTitles/>}
-        {selectedItem === 'Points' && <MyPoints point={userInfo.point}/>}
-        {selectedItem === 'Coupons' && <MyCoupons/>}
-        {selectedItem === 'Reviews' && <MyReviews/>}
-        {!selectedItem && <UserMain/>}
+        {selectedItem === "MyProfile" && <MyProfile />}
+        {selectedItem === "MyLists" && <MyLists nickName={userInfo.nickName} />}
+        {selectedItem === "Reservations" && <MyReservations />}
+        {selectedItem === "Titles" && <MyTitles />}
+        {selectedItem === "Points" && <MyPoints point={userInfo.point} />}
+        {/* {selectedItem === 'Coupons' && <MyCoupons/>}
+        {selectedItem === 'Reviews' && <MyReviews/>} */}
+        {!selectedItem && <UserMain />}
       </div>
     </>
   );

@@ -16,7 +16,7 @@ export default function FoodMate() {
   const [orderBy, setOrderBy] = useState("createdAt");
   const [selectCategory, setSelectCategory] = useState(null);
   const [region, setRegion] = useState("");
-  const itemsPerPage = 4;
+  const itemsPerPage = 7;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(foodMates.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -26,16 +26,16 @@ export default function FoodMate() {
   useEffect(() => {
     async function findAllFoodMates(orderBy) {
       try {
-        const foodMates = await FoodMateAPI.findAllFoodMates({
+        const res = await FoodMateAPI.findAllFoodMates({
           orderBy,
           selectCategory,
           region,
         });
-        console.log(foodMates);
-        if (!foodMates.message) {
-          setFoodMates(foodMates);
+
+        if (res.statusText === "OK") {
+          setFoodMates(res.data.data);
         } else {
-          alert(foodMates.message);
+          alert(res.message);
         }
       } catch (error) {
         console.log(error);
@@ -44,7 +44,7 @@ export default function FoodMate() {
 
     findAllFoodMates();
   }, [orderBy, selectCategory, region]);
-  console.log(region);
+
   const handleOrderByChange = (e) => {
     setOrderBy(e.target.value);
   };
@@ -63,7 +63,7 @@ export default function FoodMate() {
         setRegion={setRegion}
       />
       <Div>
-        <BestList data={foodMates} />
+        <BestList data={currentPages} />
         <PageButton
           itemsPerPage={itemsPerPage}
           setCurrentPage={setCurrentPage}

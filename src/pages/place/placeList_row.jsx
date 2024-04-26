@@ -1,6 +1,7 @@
 import style from '../../styles/placeList.module.css'
 
 export default function PlaceList(props) {
+    
     return (
         <>
             <div className={style.centerContainer}>

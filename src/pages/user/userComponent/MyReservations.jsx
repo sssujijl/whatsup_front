@@ -18,8 +18,14 @@ export default function MyReservations() {
     async function fetechData() {
       try {
         const accessToken = cookies.get("accessToken");
-        const data = await ReservationAPI.findAllReservation(accessToken);
-        setReservations(data);
+        const res = await ReservationAPI.findAllReservation(accessToken);
+
+        if (res.statusCode === 200) {
+          setReservations(res.data);
+        } else {
+          alert(res.message);
+        }
+        
       } catch (err) {
         console.log(err);
       }
@@ -35,7 +41,7 @@ export default function MyReservations() {
         {currentPages.map((reservation, index) => (
           <div key={index} className={style.contents}>
             <p>{reservation.resStatus.place.title}</p>
-            <p>{reservation.status}</p>
+            <p style={{textAlign:'right'}}>{reservation.status}</p>
             <p>
               예약날짜 :{" "}
               {new Date(reservation.resStatus.dateTime).toLocaleString()}

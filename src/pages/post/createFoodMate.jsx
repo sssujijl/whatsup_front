@@ -29,13 +29,14 @@ export default function CreateFoodMate () {
                 dateTime,
                 content
             }
-            console.log(data);
-            const foodMate = await FoodMateAPI.createFoodMate(data, accessToken);
-            console.log(foodMate)
-            if (!foodMate.message) {
+
+            const res = await FoodMateAPI.createFoodMate(data, accessToken);
+            console.log(res)
+            if (res.statusText === "Created") {
+                alert(res.data.message);
                 navigate('/foodMate');
             } else {
-                alert(foodMate.message)
+                alert(res.message)
             }
         } catch (err) {
             console.log(err);

@@ -4,11 +4,6 @@ import Header from "../layout/pageHeader";
 import BestList from "./bestList";
 import FoodieAPI from "../../apis/foodie.api";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCircleArrowLeft,
-  faCircleArrowRight,
-} from "@fortawesome/free-solid-svg-icons";
 import PageButton from "../layout/pageButton";
 
 const Div = styled.div`
@@ -20,7 +15,7 @@ export default function Foodie() {
   const [foodies, setFoodies] = useState([]);
   const [orderBy, setOrderBy] = useState("latest");
   const [selectCategory, setSelectCategory] = useState(null);
-  const itemsPerPage = 4;
+  const itemsPerPage = 7;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(foodies.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -30,14 +25,15 @@ export default function Foodie() {
   useEffect(() => {
     async function findAllFoodie() {
       try {
-        const foodies = await FoodieAPI.findAllFoodie({
+        const res = await FoodieAPI.findAllFoodie({
           orderBy,
           selectCategory,
         });
-        if (!foodies.message) {
-          setFoodies(foodies);
+
+        if (res.statusText === "OK") {
+          setFoodies(res.data.data);
         } else {
-          alert(foodies.message);
+          alert(res.message);
         }
       } catch (error) {
         console.log(error);
@@ -62,7 +58,7 @@ export default function Foodie() {
         create={true}
       />
       <Div>
-        <BestList data={foodies} />
+        <BestList data={currentPages} />
         <PageButton
             itemsPerPage={itemsPerPage}
             setCurrentPage={setCurrentPage}

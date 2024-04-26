@@ -10,7 +10,7 @@ export default class FoodieAPI {
                     category: data.selectCategory
                 } 
             });
-            return response.data;
+            return response;
         } catch (error) {
             console.error(error);
             throw error;
@@ -24,7 +24,31 @@ export default class FoodieAPI {
                     Cookie: accessToken
                 },
             });
-            return response.data;
+            return response;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    static async findFoodie(id) {
+        try {
+            const response = await axios.get(`/foodies/${id}`);
+            return response;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    static async deleteFoodie(accessToken, id) {
+        try {
+            const response = await axios.delete(`/foodies/${id}`, {
+                headers: {
+                    Cookie: accessToken
+                }
+            });
+            return response;
         } catch (error) {
             console.error(error);
             throw error;

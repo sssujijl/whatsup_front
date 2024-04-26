@@ -1,6 +1,7 @@
 .container {
     display: flex;
     height: 100vh;
+    position: relative;
 }
 
 .map {
@@ -25,11 +26,22 @@
     max-height: 1500px;
 }
 
-.place {
-    width: 30%;
-    border: 1px solid gray;
-
-    overflow-y: auto;
-    max-height: 500px;
+.reSearchBtn {
+    font-size: 15px;
     position: absolute;
+    width: 180px;
+    height: 45px;
+
+    border: 1px solid black;
+    border-radius: 30px;
+    background-color: white;
+    padding: 5px;
+
+    bottom: 100px;
+    left: 55%;
+}
+
+.reSearchBtn:hover {
+    background-color: black;
+    color: white;
 }

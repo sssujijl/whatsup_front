@@ -11,7 +11,7 @@ export default class FoodMateAPI {
                     region: data.region
                 } 
             });
-            return response.data;
+            return response;
         } catch (error) {
             console.error(error);
             throw error;
@@ -25,7 +25,45 @@ export default class FoodMateAPI {
                     Cookie: accessToken
                 },
             });
-            return response.data;
+            return response;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    static async findFoodMate(id) {
+        try {
+            const response = await axios.get(`/foodmates/${id}`);
+            return response;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    static async deleteFoodMate(accessToken, id) {
+        try {
+            const response = await axios.delete(`/foodmates/${id}`, {
+                headers: {
+                    Cookie: accessToken
+                }
+            });
+            return response;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    static async applicationFoodMate(accessToken, id) {
+        try {
+            const response = await axios.get(`/foodmates/${id}/application`, {
+                headers: {
+                    Cookie: accessToken
+                }
+            });
+            return response;
         } catch (error) {
             console.error(error);
             throw error;

@@ -12,8 +12,14 @@ export default function MyProfile() {
     e.preventDefault();
     try {
       const accessToken = cookies.get("accessToken");
-      const data = await UserAPI.getUser(accessToken, password);
-      setUser(data);
+      const res = await UserAPI.getUser(accessToken, password);
+
+      if (res.statusCode === 200) {
+        setUser(res.data);
+      } else {
+        alert(res.message)
+      }
+      
     } catch (err) {
       console.log(err);
     }
@@ -23,8 +29,13 @@ export default function MyProfile() {
     e.preventDefault();
     try {
       const accessToken = cookies.get("accessToken");
-      const data = await UserAPI.secession(accessToken, password);
-      setUser(data);
+      const res = await UserAPI.secession(accessToken, password);
+
+      if (res.statusCode === 200) {
+        alert(res.message);
+        window.location.href = '/';
+      }
+      
     } catch (err) {
       console.log(err);
     }
@@ -46,7 +57,7 @@ export default function MyProfile() {
     return (
       <>
         <div className={style.mainContainer}>
-          <p className={style.mainTitle}>My Profile</p>
+          <p className={style.mainTitle}>Profile</p>
           <div className={style.getInfo}>
             <h3>비밀번호를 입력하세요.</h3>
             <input

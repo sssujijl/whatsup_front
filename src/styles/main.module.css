@@ -14,10 +14,19 @@
 .missionTitle {
     font-family: 'Pretendard';
     font-style: italic;
+    margin-top: 100px;
 }
 
 .missionInfos {
     height: 500px;
+    background-color: rgb(31, 72, 46);
+    position: relative;
+}
 
-    background-color: darkslategray;
+.comming {
+    position: absolute;
+    right: 20px;
+    font-size: 85px;
+    bottom: 0px;
+    font-style: italic;
 }

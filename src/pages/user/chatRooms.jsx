@@ -20,8 +20,14 @@ export default function ChatRooms() {
     async function fetechDate() {
       try {
         const accessToken = cookies.get("accessToken");
-        const data = await ChatRoomAPI.findAllChatRooms(accessToken);
-        setChatRooms(data);
+        const res = await ChatRoomAPI.findAllChatRooms(accessToken);
+
+        if (res.statusCode === 200) {
+          setChatRooms(res.data);
+        } else {
+          alert(res.message);
+        }
+        
       } catch (err) {
         console.log(err);
       }

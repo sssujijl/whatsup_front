@@ -23,8 +23,13 @@ export default function ChatRoom() {
     async function fetechData() {
       try {
         const accessToken = cookies.get("accessToken");
-        const user = await UserAPI.getUser(accessToken);
-        setUser(user);
+        if (!accessToken) {
+          alert('사용자의 로그인 인증시간이 만료되었습니다.');
+          window.location.href = '/';
+        }
+        
+        const res = await UserAPI.findUser(accessToken);
+        setUser(res);
       } catch (err) {
         console.log(err);
       }
@@ -46,8 +51,12 @@ export default function ChatRoom() {
     });
   
     newSocket.on(`message: ${id}`, (res) => {
-      res.currentTime = format(new Date(res.currentTime), 'a hh:mm')
-      setMessages((prevState) => prevState.concat(res));
+      if (!messages || messages.length === 0) {
+        setMessages(res);
+      } else {
+        setMessages((prevState) => prevState.concat(res));
+      }
+      
     });
 
     return () => {
@@ -72,12 +81,16 @@ export default function ChatRoom() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const message = await ChatRoomAPI.findAllMessage(
+        const res = await ChatRoomAPI.findAllMessage(
           id,
           cookies.get("accessToken")
         );
-        setMessages(message);
-          console.log(message);
+
+        if (res.statusCode === 200) {
+          setMessages(res.data);
+        } else {
+          alert(res.message)
+        }
         
       } catch (err) {
         console.log(err);
@@ -85,24 +98,24 @@ export default function ChatRoom() {
     };
     fetchData();
   }, []);
-
+  console.log(messages)
   return (
     <>
       <div className={style.chatRoom}>
         <div id="chatContainer" className={style.messages}>
-          {messages.map((message, index) => (
+          {messages && messages.map((message, index) => (
             <div key={index}>
               {message.userId === user.id ? (
                 <div className={style.sender}>
-                  <p className={style.dateTime}>{message.currentTime}</p>
-                  <p className={style.message}>{message.message}</p>
+                  <p className={style.dateTime}>{format(new Date(message.createdAt), 'a hh:mm')}</p>
+                  <p className={style.message}>{message.content}</p>
                 </div>
               ) : (
                 <div className={style.receiver}>
-                  <span className={style.nickName}>{message.nickName}</span>
+                  <span className={style.nickName}>{message.user.nickName}</span>
                   <div style={{ display: "flex" }}>
-                    <p className={style.message}>{message.message}</p>
-                    <p className={style.dateTime}>{message.currentTime}</p>
+                    <p className={style.message}>{message.content}</p>
+                    <p className={style.dateTime}>{message.createdAt}</p>
                   </div>
                 </div>
               )}

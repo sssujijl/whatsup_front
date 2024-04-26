@@ -36,7 +36,7 @@ export default function Header(props) {
 
   return (
     <>
-      <HeaderContainer  marginBottom={props.marginBottom}>
+      <HeaderContainer marginBottom={props.marginBottom}>
         <Title>{props.title}</Title>
         <p
           className={style.category}
@@ -45,11 +45,28 @@ export default function Header(props) {
         >
           {props.category && props.category}
         </p>
-        {category && <Category setCategory={setCategory} setSelectCategory={props.setSelectCategory}/>}
-        {props.orderBy && <OrderBy handleOrderByChange={props.handleOrderByChange} orderBy={props.OrderBy} />}
-        {props.create && <CreatePost handleCreatePost={handleCreatePost}/>}
-        {props.region && <div className={style.region}><Region setRegion={props.setRegion}/></div>}
-        {props.search && <SearchInput />}
+        {category && (
+          <Category
+            setCategory={setCategory}
+            setSelectCategory={props.setSelectCategory}
+          />
+        )}
+        {props.orderBy && (
+          <OrderBy
+            handleOrderByChange={props.handleOrderByChange}
+            orderBy={props.OrderBy}
+          />
+        )}
+        {props.create && <CreatePost handleCreatePost={handleCreatePost} />}
+        {props.region && (
+          <div className={style.region}>
+            <Region setRegion={props.setRegion} />
+          </div>
+        )}
+        {props.search && (
+          <SearchInput
+          />
+        )}
       </HeaderContainer>
     </>
   );
@@ -58,9 +75,11 @@ export default function Header(props) {
 function CreatePost({ handleCreatePost }) {
   return (
     <>
-      <p className={style.create} onClick={handleCreatePost}>게시물 작성하기</p>
+      <p className={style.create} onClick={handleCreatePost}>
+        게시물 작성하기
+      </p>
     </>
-  )
+  );
 }
 
 function SearchInput() {
@@ -81,18 +100,20 @@ function SearchInput() {
 }
 
 function OrderBy({ handleOrderByChange, orderBy }) {
-
   return (
-      <select className={style.orderBy} onChange={handleOrderByChange} value={orderBy}>
-          <option value="createdAt">최신순</option>
-          <option value="popular">인기순</option>
-          <option value="views">조회수순</option>
-      </select>
+    <select
+      className={style.orderBy}
+      onChange={handleOrderByChange}
+      value={orderBy}
+    >
+      <option value="createdAt">최신순</option>
+      <option value="popular">인기순</option>
+      <option value="views">조회수순</option>
+    </select>
   );
 }
 
 function Category({ setSelectCategory, setCategory }) {
-
   const handleCategoryChange = (category) => {
     setSelectCategory(category);
   };
@@ -106,17 +127,30 @@ function Category({ setSelectCategory, setCategory }) {
       >
         <button
           style={{ marginLeft: "110px" }}
-          onClick={() => handleCategoryChange('Korean')}
-        > 한식 </button>
-        <button onClick={() => handleCategoryChange('Western')}>양식</button>
-        <button onClick={() => handleCategoryChange('Chinese')}>중식</button>
-        <button onClick={() => handleCategoryChange('Japanese')}>일식</button>
-        <button onClick={() => handleCategoryChange('NightFood')}>야식</button>
-        <button onClick={() => handleCategoryChange('Snack')}>분식</button>
-        <button onClick={() => handleCategoryChange('Meat')}>고기</button>
-        <button onClick={() => handleCategoryChange('Dessert')}>디저트</button>
-        <button style={{ width: "80px" }} onClick={() => handleCategoryChange('Asian')}>아시아음식</button>
-        <button style={{ width: "80px" }} onClick={() => handleCategoryChange('FastFood')}>패스트푸드</button>
+          onClick={() => handleCategoryChange("Korean")}
+        >
+          {" "}
+          한식{" "}
+        </button>
+        <button onClick={() => handleCategoryChange("Western")}>양식</button>
+        <button onClick={() => handleCategoryChange("Chinese")}>중식</button>
+        <button onClick={() => handleCategoryChange("Japanese")}>일식</button>
+        <button onClick={() => handleCategoryChange("NightFood")}>야식</button>
+        <button onClick={() => handleCategoryChange("Snack")}>분식</button>
+        <button onClick={() => handleCategoryChange("Meat")}>고기</button>
+        <button onClick={() => handleCategoryChange("Dessert")}>디저트</button>
+        <button
+          style={{ width: "80px" }}
+          onClick={() => handleCategoryChange("Asian")}
+        >
+          아시아음식
+        </button>
+        <button
+          style={{ width: "80px" }}
+          onClick={() => handleCategoryChange("FastFood")}
+        >
+          패스트푸드
+        </button>
       </div>
     </>
   );

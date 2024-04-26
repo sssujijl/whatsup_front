@@ -45,6 +45,20 @@ export default class UserAPI {
         }
     }
 
+    static async findUser(accessToken) {
+        try {
+            const response = await axios.get('/users', {
+                headers: {
+                    Cookie: accessToken
+                }
+            });
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
     static async getUser(accessToken, password) {
         try {
             const response = await axios.post('/users/info', { password }, {

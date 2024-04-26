@@ -1,8 +1,10 @@
 import styled from "styled-components"
 import style from '../../styles/bestList.module.css'
+import { useNavigate } from "react-router-dom"
 
 const BestViews = styled.div`
 width: 60%;
+height: 800px;
 margin-left: 20%;
 margin-top: 150px;
 
@@ -15,7 +17,7 @@ export default function BestList(props) {
         <BestViews>
             <h1>{props.title}</h1>
             {props.data && props.data.map((post, index) => (
-                <Post key={index} post={post} />
+                <Post key={index} post={post}/>
             ))
             }
         </BestViews>
@@ -23,7 +25,8 @@ export default function BestList(props) {
     )
 }
 
-function Post({post}) {
+function Post({ post }) {
+    const navigate = useNavigate();
     const postDate = new Date(post.createdAt);
     const currentDate = new Date();
     const timeDiff = currentDate.getTime() - postDate.getTime();
@@ -39,9 +42,13 @@ function Post({post}) {
         displayDate = postDate.toLocaleDateString();
     }
 
+    const handleClick = () => {
+        navigate(`${post.id}`, { state: { post } });
+    };
+
     return (
         <>
-        <div className={style.post}>
+        <div className={style.post} onClick={handleClick}>
             <h3 className={style.title}>{post.title}</h3>
             {post.level && (
                 <p className={style.level}>{`${post.level} 이상`}</p>
