@@ -1,0 +1,97 @@
+.paymentContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.paymentBox {
+  width: 350px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.paymentHeader {
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.paymentBody {
+  padding: 20px;
+}
+
+.inputGuide {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #666;
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+}
+
+.priceInput {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+  outline: none;
+}
+
+.priceUnit {
+  padding: 10px;
+}
+
+.payButton {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px 0;
+  background-color: #ffcd00;
+  color: #3c1e1e;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease;
+}
+
+.payButton:hover {
+  background-color: #ffaa00;
+}
+
+.title {
+  margin: 0;
+  padding: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.paymentResult {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.paymentResult p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.success {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #2ecc71;
+}
+
+.currentPoint {
+  margin-top: 10px;
+  border-top: 1px solid #ccc;
+  padding-top: 5px;
+}
