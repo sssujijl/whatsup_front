@@ -69,7 +69,7 @@ export default function Main() {
 
     rankingTitle();
   }, []);
-
+  console.log(mission.length);
   return (
     <>
       {/* <h1 className={style.mainTitle}>오늘 뭐 먹지?</h1> */}
@@ -83,7 +83,7 @@ export default function Main() {
         }}
       >
         <h1 className={style.missionTitle}>오늘의 미션장소는 ?</h1>
-        {mission ? (
+        {mission && mission.length > 0 ? (
           <>
             <p>
               {mission.date} {mission.time}
@@ -92,7 +92,7 @@ export default function Main() {
             <h2 className={style.missionTitle}>Click here</h2>
           </>
         ) : (
-          <h1 className={style.missionTitle}>Comming Soon</h1>
+          <h1 className={style.missionTitle}>Coming Soon</h1>
         )}
       </div>
       {/* <PlaceList title={"어제 가장 예약이 많았던 장소들"} />
@@ -108,7 +108,10 @@ export default function Main() {
               <p>
                 {title.level} - {title.count} 번
               </p>
-              <p><FontAwesomeIcon icon={faCrown} style={{color:'gold'}}/> {" "} {title.user.nickName}</p>
+              <p>
+                <FontAwesomeIcon icon={faCrown} style={{ color: "gold" }} />{" "}
+                {title.user.nickName}
+              </p>
             </div>
           ))}
         <PageButton
