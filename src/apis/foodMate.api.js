@@ -35,7 +35,7 @@ export default class FoodMateAPI {
     static async findFoodMate(id) {
         try {
             const response = await axios.get(`/foodmates/${id}`);
-            return response;
+            return response.data;
         } catch (error) {
             console.error(error);
             throw error;
@@ -49,7 +49,7 @@ export default class FoodMateAPI {
                     Cookie: accessToken
                 }
             });
-            return response;
+            return response.data;
         } catch (error) {
             console.error(error);
             throw error;
@@ -63,7 +63,17 @@ export default class FoodMateAPI {
                     Cookie: accessToken
                 }
             });
-            return response;
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    static async searchFoodMates(body) {
+        try {
+            const response = await axios.post('/foodmates/search', {body});
+            return response.data;
         } catch (error) {
             console.error(error);
             throw error;

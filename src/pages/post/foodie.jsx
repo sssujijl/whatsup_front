@@ -15,12 +15,16 @@ export default function Foodie() {
   const [foodies, setFoodies] = useState([]);
   const [orderBy, setOrderBy] = useState("latest");
   const [selectCategory, setSelectCategory] = useState(null);
+  const [search, setSearch] = useState("");
+
   const itemsPerPage = 7;
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(foodies.length / itemsPerPage);
+  const totalPages = foodies ? Math.ceil(foodies.length / itemsPerPage) : 0;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentPages = foodies.slice(indexOfFirstItem, indexOfLastItem);
+  const currentPages = foodies
+    ? foodies.slice(indexOfFirstItem, indexOfLastItem)
+    : 0;
 
   useEffect(() => {
     async function findAllFoodie() {
@@ -46,6 +50,20 @@ export default function Foodie() {
     setOrderBy(e.target.value);
   };
 
+  const handleSearch = async () => {
+    try {
+      const res = await FoodieAPI.searchFoodies(search);
+
+      if (res.statusCode === 200) {
+        setFoodies(res.data);
+      } else {
+        alert(res.message);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  console.log(foodies);
   return (
     <>
       <Header
@@ -54,19 +72,28 @@ export default function Foodie() {
         orderBy={true}
         OrderBy={orderBy}
         handleOrderByChange={handleOrderByChange}
-        search={true}
+        searchInput={true}
+        search={search}
+        setSearch={setSearch}
+        handleSearch={handleSearch}
         create={true}
       />
-      <Div>
-        <BestList data={currentPages} />
-        <PageButton
+      {foodies ? (
+        <Div>
+          <BestList data={currentPages} />
+          <PageButton
             itemsPerPage={itemsPerPage}
             setCurrentPage={setCurrentPage}
             currentPage={currentPage}
             totalPages={totalPages}
             data={foodies}
-        />
-      </Div>
+          />
+        </Div>
+      ) : (
+        <div style={{ height: "800px" }}>
+          <h1 style={{textAlign:'center', marginTop:'150px'}}>{selectCategory} 에 해당하는 게시물을 찾을 수 없습니다.</h1>
+        </div>
+      )}
     </>
   );
 }

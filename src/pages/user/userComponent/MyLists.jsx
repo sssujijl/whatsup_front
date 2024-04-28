@@ -37,7 +37,7 @@ export default function MyLists({ nickName }) {
     const fetechDate = async () => {
       try {
         const accessToken = cookies.get("accessToken");
-        const res = await PlaceListAPI.findPlaceLists(accessToken, nickName);
+        const res = await PlaceListAPI.findAllPlaceListsByNickName(accessToken, nickName);
 
         if (res.statusCode === 200) {
           setPlaceLists(res.data);

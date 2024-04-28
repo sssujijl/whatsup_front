@@ -63,8 +63,11 @@ export default function Header(props) {
             <Region setRegion={props.setRegion} />
           </div>
         )}
-        {props.search && (
+        {props.searchInput && (
           <SearchInput
+            search={props.search}
+            setSearch={props.setSearch}
+            handleSearch={props.handleSearch}
           />
         )}
       </HeaderContainer>
@@ -82,7 +85,7 @@ function CreatePost({ handleCreatePost }) {
   );
 }
 
-function SearchInput() {
+function SearchInput(props) {
   return (
     <>
       <div className={style.searchContainer}>
@@ -90,8 +93,10 @@ function SearchInput() {
           type="text"
           placeholder="검색어를 입력하세요."
           className={style.searchInput}
+          value={props.search}
+          onChange={(e) => props.setSearch(e.target.value)}
         />
-        <button className={style.searchBtn}>
+        <button className={style.searchBtn} onClick={() => props.handleSearch()}>
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </button>
       </div>

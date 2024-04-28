@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import FoodieAPI from "../../apis/foodie.api";
 import FoodMateAPI from "../../apis/foodMate.api";
 import { Cookies } from "react-cookie";
+import Quill from "../layout/quill";
 
 const PostContainer = styled.div`
   width: 50%;
@@ -20,16 +21,21 @@ export default function Post(props) {
   const { id } = useParams();
   const url = new URL(window.location.href).pathname.split("/")[1];
   const [post, setPost] = useState([]);
+  const [answer, setAnswer] = useState(false);
+  const [content, setContent] = useState("");
+  const [foodieAnswers, setFoodieAnswers] = useState([]);
 
   useEffect(() => {
     async function fetechData() {
       try {
         if (url === "foodie") {
-          const res = await FoodieAPI.findFoodie(id);
-          setPost(res.data.data);
+          const resFoodie = await FoodieAPI.findFoodie(id);
+          const resAnswer = await FoodieAPI.findAllAnswers(id);
+          setPost(resFoodie.data);
+          setFoodieAnswers(resAnswer.data);
         } else {
           const res = await FoodMateAPI.findFoodMate(id);
-          setPost(res.data.data);
+          setPost(res.data);
         }
       } catch (err) {
         console.log(err);
@@ -41,7 +47,7 @@ export default function Post(props) {
   const handleDelete = async () => {
     try {
       if (!accessToken) {
-        alert('게시물을 삭제할 권한이 없습니다.');
+        alert("게시물을 삭제할 권한이 없습니다.");
       }
 
       let res;
@@ -50,12 +56,10 @@ export default function Post(props) {
       } else {
         res = await FoodMateAPI.deleteFoodMate(accessToken, id);
       }
-      console.log(res);
-      if (res.data.statusCode === 200) {
-        alert(res.data.message)
+
+      alert(res.message);
+      if (res.statusCode === 200) {
         window.location.href = `/${url}`;
-      } else {
-        alert(res.data.message);
       }
     } catch (err) {
       console.log(err);
@@ -65,15 +69,55 @@ export default function Post(props) {
   const handleApplication = async () => {
     try {
       const res = await FoodMateAPI.applicationFoodMate(accessToken, id);
-      console.log(res.data.data.id);
-      if (res.data.data.message) {
-        alert(res.data.data.message)
-      } else if (res.statusText === "OK") {
-        alert(res.data.message);
+
+      alert(res.message);
+      if (res.statusCode === 200) {
         window.location.href = `/chatRoom/${res.data.data.id}`;
-      } else {
-        alert(res.data.message);
       }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleCheckTitle = async () => {
+    try {
+      const res = await FoodieAPI.checkTitle(accessToken, id);
+
+      alert(res.message);
+      if (res.statusCode === 200) {
+        setAnswer(true);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleCreateFoodieAnswer = async () => {
+    try {
+      const res = await FoodieAPI.createFoodieAnswer(
+        { content },
+        accessToken,
+        id
+      );
+
+      alert(res.message);
+      if (res.statusCode === 200) {
+        window.location.reload();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleDeleteFoodieAnswer = async (foodieAnswerId) => {
+    try {
+      const res = await FoodieAPI.deleteAnswer(accessToken, id, foodieAnswerId);
+
+      alert(res.message);
+      if (res.statusCode === 200) {
+        window.location.reload();
+      }
+
     } catch (err) {
       console.log(err);
     }
@@ -102,11 +146,59 @@ export default function Post(props) {
               작성 날짜 :{" "}
               {post.createdAt && new Date(post.createdAt).toLocaleString()}
             </p>
-            {url === 'foodMate' && <button style={{right: '260px'}} onClick={() => handleApplication()}>신청하기</button>}
+            {url === "foodMate" ? (
+              <button
+                style={{ right: "255px" }}
+                onClick={() => handleApplication()}
+              >
+                신청하기
+              </button>
+            ) : (
+              <button
+                style={{ right: "255px" }}
+                onClick={() => handleCheckTitle()}
+              >
+                답변 달기
+              </button>
+            )}
             <button style={{ right: "130px" }}>수정</button>
             <button onClick={handleDelete}>삭제</button>
           </div>
         )}
+        {answer && (
+          <div style={{ width: "90%", margin: "100px auto 30px" }}>
+            <Quill content={content} setContent={setContent} />
+            <button
+              style={{
+                width: "150px",
+                height: "45px",
+                marginLeft: "auto",
+                display: "block",
+              }}
+              onClick={() => handleCreateFoodieAnswer()}
+            >
+              답변 작성하기
+            </button>
+          </div>
+        )}
+        {foodieAnswers &&
+          foodieAnswers.map((foodieAnswer, index) => (
+            <div key={index} className={style.foodieAnswerContainer}>
+              <p>{foodieAnswer.user.nickName}</p>
+              <p>{foodieAnswer.status}</p>
+              {foodieAnswer.images && (
+                <img src={foodieAnswer.images} alt="리뷰 이미지" />
+              )}
+              <div dangerouslySetInnerHTML={{ __html: foodieAnswer.content }} />
+              <p style={{ textAlign: "end" }}>
+                {new Date(foodieAnswer.updatedAt).toLocaleString()}
+              </p>
+              <div style={{marginLeft:'auto', display:'flex'}}>
+                <button>수정하기</button>
+                <button onClick={() => handleDeleteFoodieAnswer(foodieAnswer.id)}>삭제하기</button>
+              </div>
+            </div>
+          ))}
       </PostContainer>
     </>
   );

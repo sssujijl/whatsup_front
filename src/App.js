@@ -22,6 +22,7 @@ import { CheckoutPage } from "./pages/user/userComponent/pointCharge/Checkout";
 import { SuccessPage } from "./pages/user/userComponent/pointCharge/Success";
 import { FailPage } from "./pages/user/userComponent/pointCharge/Fail";
 import { KakaoPay } from "./pages/user/userComponent/pointCharge/Kakao";
+import CreateReview from "./pages/place/createReview";
 
 function App() {
   return (
@@ -31,7 +32,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/map" element={<Map />} />
-        <Route path="/places" element={<Places />} />
+
+        <Route path="/places">
+          <Route index element={<Places />} />
+          <Route path=":id/reviews" element={<CreateReview/>}/>
+        </Route>
 
         <Route path="/foodie">
           <Route index element={<Foodie />} />

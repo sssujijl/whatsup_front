@@ -1,0 +1,40 @@
+.starRating {
+    font-size: 30px;
+    margin-bottom: 60px;
+}
+
+.star {
+    cursor: pointer;
+    color: #ccc;
+}
+
+.star:hover, .star.active {
+    color: #ffd700;
+}
+
+.reviewContainer {
+    width: 40%;
+    height: 800px;
+    border: 1px solid gray;
+    margin: 50px auto 150px;
+
+    text-align: center;
+    padding: 30px;
+}
+
+.reviewContainer h1 {
+    margin-bottom: 50px;
+}
+
+.reviewContainer button {
+    border: 1px solid gray;
+    background-color: transparent;
+    width: 150px;
+    height: 45px;
+}
+
+.reviewContainer button:hover {
+    background-color: black;
+    color: white;
+    transition: 0.5s;
+}

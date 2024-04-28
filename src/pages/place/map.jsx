@@ -80,10 +80,10 @@ export default function Map() {
     try {
       const res = await PlaceAPI.searchPlace(search);
       
-      if (res.data.statusCode === 200) {
-        setPlaces(res.data.data);
+      if (res.statusCode === 200) {
+        setPlaces(res.data);
       } else {
-        alert(res.data.message)
+        alert(res.message)
       }
       
     } catch (err) {
@@ -109,6 +109,7 @@ export default function Map() {
           setSearch={setSearch}
           handleSearch={handleSearchPlace}
           setClickedPlace={setClickedPlace}
+          setPlaces={setPlaces}
         />
         <PlaceMap
           places={places}

@@ -6,15 +6,25 @@
     position: relative;
     top: 45px;
 }
+
 .missionContainer {
-    width: 70%;
-    margin: 0 auto;
-  }
+    width: 600px;
+    height: 300px;
+    margin: 100px auto;
+    background-color: rgb(180, 180, 180, 0.6);
+    text-align: center;
+    align-content: center;
+    font-family: 'Pretendard';
+}
+
+.missionContainer:hover {
+    background-color: black;
+    color: white;
+    transition: 0.5s;
+}
 
 .missionTitle {
-    font-family: 'Pretendard';
     font-style: italic;
-    margin-top: 100px;
 }
 
 .missionInfos {
@@ -29,4 +39,27 @@
     font-size: 85px;
     bottom: 0px;
     font-style: italic;
+}
+
+.rankingTitle {
+    border-bottom: 1px solid gray;
+    text-align: center;
+}
+
+.titleConainer {
+    width: 35%;
+    margin: 0 auto;
+    font-family: 'Pretendard';
+    height: 750px;
+    position: relative;
+}
+
+.titleConainer h1 {
+    font-style: italic;
+}
+
+.titleCategory {
+    font-size: 18px;
+    position: absolute;
+    font-weight: bold;
 }

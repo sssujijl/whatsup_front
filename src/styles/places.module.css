@@ -12,6 +12,7 @@
     width: 70%;
     margin: 10px auto;
     padding: 15px;
+    position: relative;
 }
 
 .place_title {
@@ -55,4 +56,92 @@
     display: flex;
 
     margin-left: 25px;
+}
+
+.resContainer {
+    position: absolute;
+    right: 30px;
+    bottom: 15px;
+    display: flex;
+}
+
+.resStatus {
+    width: 60px;
+    background-color: black;
+    color: white;
+    padding:12px;
+    border-radius: 30px;
+    margin-left: 10px;
+}
+
+.falseRes {
+    width: 60px;
+    border: 1px solid gray;
+    color: gray;
+    padding:12px;
+    border-radius: 30px;
+    margin-left: 10px;
+}
+
+.modal {
+    padding: 30px;
+
+}
+
+.resStatus:hover {
+    background-color: white;
+    border: 1px solid gray;
+    color: black;
+    transition: 0.5s;
+}
+
+.resBtn {
+    padding: 8px;
+    width: 100px;
+    margin-left: 68px;
+}
+.capacity {
+    border: 1px solid black;
+    width: 100px;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 30px;
+    padding: 8px;
+    margin: 50px auto;
+}
+
+.capacity span {
+    margin: 0 15px 0 15px;
+}
+
+.capacity button {
+    border: transparent;
+    background-color: transparent;
+    font-size: 21px;
+}
+
+.searchContainer {
+    margin: 80px auto;
+    width: fit-content;
+  }  
+
+.searchInput {
+    background-color: transparent;
+
+    border: 1px solid black;
+    border-radius: 30px;
+
+    width: 600px;
+    height: 50px;
+    text-indent: 20px;
+
+    color: black;
+}
+
+.searchBtn {
+    background-color: transparent;
+    border: 1px solid transparent;
+    color: black;
+
+    font-size: 25px;
 }

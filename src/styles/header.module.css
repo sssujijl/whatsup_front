@@ -16,7 +16,6 @@
     font-size: 15px;
 
     width: 70%;
-
     position: relative;
 }
 
@@ -27,7 +26,8 @@
 
 .map {
     font-size: 18px;
-    left: 90px;
+    /* left: 90px; */
+    left: 135px;
 }
 
 .place {
@@ -37,12 +37,14 @@
 
 .foodie {
     font-size: 18px;
-    left: 320px;
+    /* left: 320px; */
+    left: 260px;
 }
 
 .foodMate {
     font-size: 18px;
-    left: 440px;
+    /* left: 440px; */
+    left: 400px;
 }
 
 .login {

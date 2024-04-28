@@ -98,22 +98,7 @@ export default function User() {
         {selectedItem === "Points" && <MyPoints point={userInfo.point} />}
         {/* {selectedItem === 'Coupons' && <MyCoupons/>}
         {selectedItem === 'Reviews' && <MyReviews/>} */}
-        {!selectedItem && <UserMain />}
-      </div>
-    </>
-  );
-}
-
-function UserMain() {
-  return (
-    <>
-      <div className={style.mainContainer}>
-        <p className={style.mainTitle}>초기 로딩 시</p>
-        <div className={style.contents}>
-          <p>카츠혼또</p>
-          <p>예약 완료</p>
-          <p>예약날짜 : 2024-04-18 15:00</p>
-        </div>
+        {!selectedItem && <MyTitles />}
       </div>
     </>
   );

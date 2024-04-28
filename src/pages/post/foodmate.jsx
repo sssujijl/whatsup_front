@@ -16,12 +16,14 @@ export default function FoodMate() {
   const [orderBy, setOrderBy] = useState("createdAt");
   const [selectCategory, setSelectCategory] = useState(null);
   const [region, setRegion] = useState("");
+  const [search, setSearch] = useState("");
+
   const itemsPerPage = 7;
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(foodMates.length / itemsPerPage);
+  const totalPages = foodMates ? Math.ceil(foodMates.length / itemsPerPage) : 0;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentPages = foodMates.slice(indexOfFirstItem, indexOfLastItem);
+  const currentPages = foodMates ? foodMates.slice(indexOfFirstItem, indexOfLastItem) : 0;
 
   useEffect(() => {
     async function findAllFoodMates(orderBy) {
@@ -49,6 +51,20 @@ export default function FoodMate() {
     setOrderBy(e.target.value);
   };
 
+  const handleSearch = async () => {
+    try {
+      const res = await FoodMateAPI.searchFoodMates(search);
+      console.log(res);
+      if (res.statusCode === 200) {
+        setFoodMates(res.data);
+      } else {
+        alert(res.message);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <Header
@@ -57,21 +73,32 @@ export default function FoodMate() {
         orderBy={true}
         OrderBy={orderBy}
         handleOrderByChange={handleOrderByChange}
-        search={true}
+        searchInput={true}
+        search={search}
+        setSearch={setSearch}
+        handleSearch={handleSearch}
         create={true}
         region={true}
         setRegion={setRegion}
       />
-      <Div>
-        <BestList data={currentPages} />
-        <PageButton
-          itemsPerPage={itemsPerPage}
-          setCurrentPage={setCurrentPage}
-          currentPage={currentPage}
-          totalPages={totalPages}
-          data={foodMates}
-        />
-      </Div>
+      {foodMates ? (
+        <Div>
+          <BestList data={currentPages} />
+          <PageButton
+            itemsPerPage={itemsPerPage}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            data={foodMates}
+          />
+        </Div>
+      ) : (
+        <div style={{ height: "800px" }}>
+          <h1 style={{ textAlign: "center", marginTop: "150px" }}>
+            {selectCategory} 에 해당하는 게시물을 찾을 수 없습니다.
+          </h1>
+        </div>
+      )}
     </>
   );
 }

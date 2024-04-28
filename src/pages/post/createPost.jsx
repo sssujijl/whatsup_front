@@ -1,9 +1,8 @@
 import style from "../../styles/createPost.module.css";
 import { useState, useEffect } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 import PlaceAPI from "../../apis/place.api";
 import Region from "../layout/regionInput";
+import Quill from "../layout/quill";
 
 export default function CreatePost(props) {
   const [option, setOption] = useState(false);
@@ -196,38 +195,6 @@ function Level({ setLevel }) {
         <option value="신">신</option>
         <option value="음식">음식</option>
       </select>
-    </>
-  );
-}
-
-function Quill({ content, setContent }) {
-  const modules = {
-    toolbar: [
-      [{ header: "1" }, { header: "2" }, { font: [] }],
-      [{ size: [] }],
-      ["bold", "italic", "underline", "strike", "blockquote"],
-      [
-        { list: "ordered" },
-        { list: "bullet" },
-        { indent: "-1" },
-        { indent: "+1" },
-      ],
-      ["link", "image"],
-      ["clean"],
-    ],
-  };
-
-  return (
-    <>
-      <div style={{ overflowY: "auto", height: "530px" }}>
-        <ReactQuill
-          theme="snow"
-          value={content}
-          onChange={setContent}
-          modules={modules}
-          style={{ height: "450px" }}
-        />
-      </div>
     </>
   );
 }

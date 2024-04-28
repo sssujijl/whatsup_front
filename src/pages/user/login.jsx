@@ -17,11 +17,12 @@ export default function Login(props) {
         event.preventDefault();
         try {
             const formData = {email, password};
-            const user = await UserAPI.signin(formData);
-            if (!user.message) {
+            const res = await UserAPI.signin(formData);
+            if (res.statusCode === 200) {
+                alert(res.message)
                 window.location.replace('/');
             } else {
-                alert(user.message)
+                alert(res.message)
             }
         } catch (error) {
             console.log(error);

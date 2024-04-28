@@ -56,7 +56,7 @@ export default function Header(props) {
             <div className={style.logo} onClick={() => { navigate('/') }}>What's UP ?!</div>
             <div className={style.list}>
                 <p className={style.map} onClick={() => { navigate('/map') }}>MAP</p>
-                <p className={style.place} onClick={() => { navigate('/places') }}>Places</p>
+                {/* <p className={style.place} onClick={() => { navigate('/places') }}>Places</p> */}
                 <p className={style.foodie} onClick={() => { navigate('/foodie') }}>Foodie</p>
                 <p className={style.foodMate} onClick={() => { navigate('/foodMate') }}>FoodMate</p>
                 { accessToken ? <User navigate={navigate}/> : <Sign navigate={navigate}/> }

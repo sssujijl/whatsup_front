@@ -4,11 +4,11 @@ export default class FoodieAPI {
 
     static async findAllFoodie(data) {
         try {
-            const response = await axios.get('/foodies', { 
-                params: { 
+            const response = await axios.get('/foodies', {
+                params: {
                     orderBy: data.orderBy,
                     category: data.selectCategory
-                } 
+                }
             });
             return response;
         } catch (error) {
@@ -19,7 +19,7 @@ export default class FoodieAPI {
 
     static async createFoodie(data, accessToken) {
         try {
-            const response = await axios.post('/foodies', data, { 
+            const response = await axios.post('/foodies', data, {
                 headers: {
                     Cookie: accessToken
                 },
@@ -34,7 +34,7 @@ export default class FoodieAPI {
     static async findFoodie(id) {
         try {
             const response = await axios.get(`/foodies/${id}`);
-            return response;
+            return response.data;
         } catch (error) {
             console.error(error);
             throw error;
@@ -48,7 +48,69 @@ export default class FoodieAPI {
                     Cookie: accessToken
                 }
             });
-            return response;
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    static async createFoodieAnswer(data, accessToken, foodieId) {
+        try {
+            const response = await axios.post(`/foodie/${foodieId}/foodie_answer`, data, {
+                headers: {
+                    Cookie: accessToken
+                },
+            });
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    static async checkTitle(accessToken, foodieId) {
+        try {
+            const response = await axios.get(`/foodie/${foodieId}/foodie_answer/validate`, {
+                headers: {
+                    Cookie: accessToken
+                },
+            });
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    static async findAllAnswers(foodieId) {
+        try {
+            const response = await axios.get(`/foodie/${foodieId}/foodie_answer`);
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    static async deleteAnswer(accessToken, foodieId, foodieAnswerId) {
+        try {
+            const response = await axios.delete(`/foodie/${foodieId}/foodie_answer/${foodieAnswerId}`, {
+                headers: {
+                    Cookie: accessToken
+                },
+            });
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    static async searchFoodies(body) {
+        try {
+            const response = await axios.post('/foodies/search', {body});
+            return response.data;
         } catch (error) {
             console.error(error);
             throw error;

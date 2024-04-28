@@ -21,4 +21,14 @@ export default class MissionAPI {
             throw error;
         }
     }
+
+    static async findTodayMissionInfo() {
+        try {
+            const response = await axios.get('/missions/info');
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
 }
