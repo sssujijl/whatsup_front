@@ -3,7 +3,6 @@ import axios from "axios";
 export default class UserAPI {
   static async signUp(data) {
     try {
-      console.log(data);
       const response = await axios.post("/users/signup", data);
       return response.data;
     } catch (error) {

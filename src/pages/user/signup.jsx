@@ -38,11 +38,16 @@ export default function Signup() {
         birth,
         gender,
         phone,
-        smsConsent
+        smsConsent,
       };
-      await UserAPI.signUp(format);
+      const res = await UserAPI.signUp(format);
+      if (res.statusCode === 200) {
+        alert('회원가입이 완료되었습니다.');
+        navigate("/login");
+      } else {
+        alert(res.message);
+      }
 
-      navigate('/login')
     } catch (error) {
       console.error(error);
     }
@@ -51,12 +56,17 @@ export default function Signup() {
   const handleCheckDuplicate = async (event) => {
     event.preventDefault();
     try {
-      const formData = {nickName, phone};
-      await UserAPI.checkDuplicate(formData);
-      alert('사용 가능합니다.')
+      const formData = { nickName, phone };
+      const res = await UserAPI.checkDuplicate(formData);
+
+      if (res.statusCode === 200) {
+        alert(`사용 가능합니다.`);
+      } else {
+        alert(res.message);
+      }
+
     } catch (error) {
       console.error(error);
-      alert(`${nickName || phone} 중복되었습니다.`);
     }
   };
 
@@ -64,17 +74,18 @@ export default function Signup() {
   const handleCheckDuplicateEmail = async (event) => {
     event.preventDefault();
     try {
-      await UserAPI.checkDuplicate({email});
+      const res = await UserAPI.checkDuplicate({ email });
+      if (res.statusCode === 200) {
+        setShowTimer(true);
+        startTimer();
+        alert(`${email} 로 인증메일을 발송하였습니다.`);
+      } else {
+        alert(res.message);
+      }
 
-      setShowTimer(true);
-      startTimer();
-
-      alert(`${email} 로 인증메일을 발송하였습니다.`)
     } catch (error) {
       console.error(error);
-      alert(`${email} 중복되었습니다.`);
     }
-
   };
 
   // 타이머 시작 함수
@@ -96,17 +107,17 @@ export default function Signup() {
       clearInterval(timer);
       setShowTimer(false);
       setRemainingTime(180);
-      alert('인증이 완료되었습니다.')
+      alert("인증이 완료되었습니다.");
     }
-  }, [isVerified])
+  }, [isVerified]);
 
   useEffect(() => {
     if (remainingTime === 0) {
       setShowTimer(false);
       setRemainingTime(180);
-      alert('인증시간이 만료되었습니다. 인증메일을 다시 발송하세요.');
+      alert("인증시간이 만료되었습니다. 인증메일을 다시 발송하세요.");
     }
-  }, [remainingTime])
+  }, [remainingTime]);
 
   return (
     <>
@@ -221,7 +232,9 @@ export default function Signup() {
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
         />
-        <button className={style.checkBtn} onClick={handleCheckDuplicate}>중복 확인</button>
+        <button className={style.checkBtn} onClick={handleCheckDuplicate}>
+          중복 확인
+        </button>
 
         <h4 className={style.sms}>문자메세지 수신 동의</h4>
         <input
@@ -232,7 +245,9 @@ export default function Signup() {
           onChange={(e) => setSmsConsent(e.target.checked)}
         />
 
-        <button className={style.signupBtn} onClick={handleSignUp}>회원가입하기</button>
+        <button className={style.signupBtn} onClick={handleSignUp}>
+          회원가입하기
+        </button>
       </div>
     </>
   );
@@ -246,11 +261,11 @@ function IsVerifiedEmail(props) {
   const handleCheckVerification = async (event) => {
     event.preventDefault();
     try {
-      await UserAPI.verificationCode({email, checkVerificationCode});
+      await UserAPI.verificationCode({ email, checkVerificationCode });
 
       props.setIsVerified(true);
 
-      alert(`${email} 인증 성공하였습니다.`)
+      alert(`${email} 인증 성공하였습니다.`);
     } catch (error) {
       console.error(error);
       alert(`인증번호가 일치하지 않습니다.`);
