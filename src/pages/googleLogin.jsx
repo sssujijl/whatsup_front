@@ -10,7 +10,7 @@
 //     try {
 //       navigate('/');
 //         console.log(response);
-//         const google = await UserAPI.googleLogin();
+//         const google = await UserAPI.googleLogin(response);
 //         console.log('--google', google);
 //     } catch (error) {
 //         console.log(error);

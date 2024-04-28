@@ -22,6 +22,7 @@ import { CheckoutPage } from "./pages/user/userComponent/pointCharge/Checkout";
 import { SuccessPage } from "./pages/user/userComponent/pointCharge/Success";
 import { FailPage } from "./pages/user/userComponent/pointCharge/Fail";
 import { KakaoPay } from "./pages/user/userComponent/pointCharge/Kakao";
+import AdditionalInfoForm from "./pages/GoogleAdditionalInfoForm";
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
         <Route path="/user/toss/fail" element={<FailPage />} />
         <Route path="/user/kakao" element={<KakaoPay />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/user/google" element={<AdditionalInfoForm />} />
         <Route path="/signup" element={<Signup />} />
 
         <Route path="*" element={<h1> 404 없는 페이지임 </h1>}></Route>

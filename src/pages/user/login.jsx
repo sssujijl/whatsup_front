@@ -52,9 +52,11 @@ export default function Login(props) {
             </div>
             <button className={style.loginBtn} onClick={handleLogin}>로그인하기</button>
             <div className={style.imgContainer}>
-                <img src={naver}/>
-                <img src={kakao}/>
-                <img src={google}/>
+                <img src={naver} alt="네이버 로그인"/>
+                <img src={kakao} alt="카카오 로그인"/>
+                <a href='http://localhost:3000/users/signin/google'>
+                <img src={google} alt="구글 로그인"/>
+                </a>
             </div>
         </div>
         </>
