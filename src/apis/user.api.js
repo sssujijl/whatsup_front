@@ -89,6 +89,24 @@ export default class UserAPI {
     }
   }
 
+   // static async getUser(accessToken, password) {
+  //   try {
+  //     const response = await axios.post(
+  //       "/users/info",
+  //       { password },
+  //       {
+  //         headers: {
+  //           Cookie: accessToken,
+  //         },
+  //       }
+  //     );
+  //     return response.data;
+  //   } catch (error) {
+  //     console.error(error);
+  //     throw error;
+  //   }
+  // }
+
   static async getUserInfo(accessToken) {
     try {
       const response = await axios.get('/users/info', {
@@ -160,10 +178,35 @@ export default class UserAPI {
     }
   }
 
-  static async googleLogin() {
+  static async googleLogin(response) {
     try {
-      const response = await axios.get("/users/signin/google");
-      return response.data;
+      const accessToken = response.accessToken;
+      const google = await axios.get(
+        `/users/signin/google?accessToken=${accessToken}`
+      );
+      return google.data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
+  static async submitAdditionalInfo(accessToken, additionalInfo) {
+    try {
+      const response = await axios.post(
+        "/users/additional-info",
+        additionalInfo,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      if (response.data.statusCode === 200) {
+        return true;
+      } else {
+        return false;
+      }
     } catch (error) {
       console.error(error);
       throw error;
