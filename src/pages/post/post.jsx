@@ -70,9 +70,11 @@ export default function Post(props) {
     try {
       const res = await FoodMateAPI.applicationFoodMate(accessToken, id);
 
-      alert(res.message);
-      if (res.statusCode === 200) {
-        window.location.href = `/chatRoom/${res.data.data.id}`;
+      if (res.data.message) {
+        alert(res.data.message);
+      } else if (res.statusCode === 200) {
+        alert(res.message);
+        window.location.href = `/chatRoom/${res.data.id}`;
       }
     } catch (err) {
       console.log(err);

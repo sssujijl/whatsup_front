@@ -89,24 +89,6 @@ export default class UserAPI {
     }
   }
 
-   // static async getUser(accessToken, password) {
-  //   try {
-  //     const response = await axios.post(
-  //       "/users/info",
-  //       { password },
-  //       {
-  //         headers: {
-  //           Cookie: accessToken,
-  //         },
-  //       }
-  //     );
-  //     return response.data;
-  //   } catch (error) {
-  //     console.error(error);
-  //     throw error;
-  //   }
-  // }
-
   static async getUserInfo(accessToken) {
     try {
       const response = await axios.get('/users/info', {
@@ -151,26 +133,26 @@ export default class UserAPI {
 
   static async secession(accessToken, password) {
     try {
-      const response = await axios.delete(
-        "/users",
-        { password },
-        {
+      const response = await axios.patch("/users/delete", {password}, {
           headers: {
             Cookie: accessToken,
           },
         }
       );
-
-      return response.data;
+      return response;
     } catch (error) {
       console.error(error);
       throw error;
     }
   }
 
-  static async editUser(data) {
+  static async editUser(accessToken, data) {
     try {
-      const response = await axios.patch("/users", data);
+      const response = await axios.patch("/users", data, {
+        headers: {
+          Cookie: accessToken
+        }
+      });
       return response.data;
     } catch (error) {
       console.error(error);

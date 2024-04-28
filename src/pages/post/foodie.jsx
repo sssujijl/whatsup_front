@@ -16,7 +16,7 @@ export default function Foodie() {
   const [orderBy, setOrderBy] = useState("latest");
   const [selectCategory, setSelectCategory] = useState(null);
   const [search, setSearch] = useState("");
-
+  console.log(orderBy)
   const itemsPerPage = 7;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = foodies ? Math.ceil(foodies.length / itemsPerPage) : 0;
@@ -33,7 +33,7 @@ export default function Foodie() {
           orderBy,
           selectCategory,
         });
-
+        
         if (res.statusText === "OK") {
           setFoodies(res.data.data);
         } else {
@@ -63,7 +63,7 @@ export default function Foodie() {
       console.log(err);
     }
   };
-  console.log(foodies);
+
   return (
     <>
       <Header
@@ -91,7 +91,7 @@ export default function Foodie() {
         </Div>
       ) : (
         <div style={{ height: "800px" }}>
-          <h1 style={{textAlign:'center', marginTop:'150px'}}>{selectCategory} 에 해당하는 게시물을 찾을 수 없습니다.</h1>
+          <h1 style={{textAlign:'center', marginTop:'150px'}}>해당하는 게시물을 찾을 수 없습니다.</h1>
         </div>
       )}
     </>

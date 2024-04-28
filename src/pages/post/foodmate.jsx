@@ -26,7 +26,7 @@ export default function FoodMate() {
   const currentPages = foodMates ? foodMates.slice(indexOfFirstItem, indexOfLastItem) : 0;
 
   useEffect(() => {
-    async function findAllFoodMates(orderBy) {
+    async function findAllFoodMates() {
       try {
         const res = await FoodMateAPI.findAllFoodMates({
           orderBy,
@@ -54,7 +54,6 @@ export default function FoodMate() {
   const handleSearch = async () => {
     try {
       const res = await FoodMateAPI.searchFoodMates(search);
-      console.log(res);
       if (res.statusCode === 200) {
         setFoodMates(res.data);
       } else {
@@ -95,7 +94,7 @@ export default function FoodMate() {
       ) : (
         <div style={{ height: "800px" }}>
           <h1 style={{ textAlign: "center", marginTop: "150px" }}>
-            {selectCategory} 에 해당하는 게시물을 찾을 수 없습니다.
+             해당하는 게시물을 찾을 수 없습니다.
           </h1>
         </div>
       )}

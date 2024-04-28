@@ -5,6 +5,7 @@ import UserAPI from "../../../apis/user.api";
 
 export default function MyProfile() {
   const cookies = new Cookies();
+  const accessToken = cookies.get("accessToken");
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
 
@@ -25,14 +26,12 @@ export default function MyProfile() {
     }
   };
 
-  const handleSecession = async (e) => {
-    e.preventDefault();
+  const handleSecession = async () => {
     try {
-      const accessToken = cookies.get("accessToken");
       const res = await UserAPI.secession(accessToken, password);
-
-      if (res.statusCode === 200) {
-        alert(res.message);
+      console.log(res)
+      if (res.status === 200) {
+        alert(res.data.message);
         window.location.href = '/';
       }
       
@@ -49,10 +48,6 @@ export default function MyProfile() {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
   if (!user) {
     return (
       <>
@@ -67,8 +62,8 @@ export default function MyProfile() {
               onChange={(e) => setPassword(e.target.value)}
             />
             <div style={{margin:'30px auto'}}>
-              <button onClick={handleUser}>내 정보 조회하기</button>
-              <button onClick={handleSecession}>탈퇴하기</button>
+              <button onClick={() => handleUser()}>내 정보 조회하기</button>
+              <button onClick={() => handleSecession()}>탈퇴하기</button>
             </div>
           </div>
         </div>
@@ -80,7 +75,7 @@ export default function MyProfile() {
     <>
       <div className={style.mainContainer}>
         <p className={style.mainTitle}>My Profile</p>
-        <form className={style.contents} onSubmit={handleSubmit}>
+        <form className={style.contents}>
           <h4>이메일</h4>
           <input
             type="email"

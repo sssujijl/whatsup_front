@@ -79,7 +79,7 @@ export default function MyLists({ nickName }) {
                 <FontAwesomeIcon icon={faLockOpen} />
               </p>
             ) : (
-              <p>
+              <p style={{ margin: "30px 20px 0 0", fontSize: "13px" }}>
                 <FontAwesomeIcon icon={faLock} />
               </p>
             )}

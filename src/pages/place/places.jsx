@@ -21,14 +21,19 @@ export default function Places() {
   const [capacity, setCapacity] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectResId, setSelectResId] = useState("");
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
+  const [searchPlace, setSearchPlace] = useState([]);
 
   const itemsPerPage = 6;
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(places.length / itemsPerPage);
+  
+  const searchResults = searchPlace.length > 0 ? searchPlace : places;
+
+  const totalPages = Math.ceil(searchResults.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentPages = places.slice(indexOfFirstItem, indexOfLastItem);
+  const currentPages = searchResults.slice(indexOfFirstItem, indexOfLastItem);
+  
 
   useEffect(() => {
     async function fetchMission() {
@@ -48,18 +53,19 @@ export default function Places() {
   }, []);
 
   const handleSearch = () => {
-    const searchWords = search.toLowerCase().split(' ');
-    console.log(searchWords, search)
-    const result = places.filter(place => 
-      searchWords.some(word => 
-        // place.foodCategory.category.includes(word) ||
-        place.title.includes(word) ||
-        place.address.includes(word) ||
-        place.roadAddress.includes(word)
+    const searchWords = search.toLowerCase().split(" ");
+    console.log(searchWords, search);
+    const result = places.filter((place) =>
+      searchWords.some(
+        (word) =>
+          // place.foodCategory.category.includes(word) ||
+          place.title.includes(word) ||
+          place.address.includes(word) ||
+          place.roadAddress.includes(word)
       )
     );
 
-    setPlaces(result);
+    setSearchPlace(result);
   };
 
   const handleReservation = async () => {

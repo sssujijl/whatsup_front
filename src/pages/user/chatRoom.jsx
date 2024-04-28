@@ -16,18 +16,19 @@ export default function ChatRoom() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    document.getElementById('chatContainer').scrollTop = document.getElementById('chatContainer').scrollHeight
-  }, [messages])
+    document.getElementById("chatContainer").scrollTop =
+      document.getElementById("chatContainer").scrollHeight;
+  }, [messages]);
 
   useEffect(() => {
     async function fetechData() {
       try {
         const accessToken = cookies.get("accessToken");
         if (!accessToken) {
-          alert('사용자의 로그인 인증시간이 만료되었습니다.');
-          window.location.href = '/';
+          alert("사용자의 로그인 인증시간이 만료되었습니다.");
+          window.location.href = "/";
         }
-        
+
         const res = await UserAPI.findUser(accessToken);
         setUser(res);
       } catch (err) {
@@ -49,14 +50,12 @@ export default function ChatRoom() {
     newSocket.on("connect", () => {
       console.log("Connected to server");
     });
-  
+
     newSocket.on(`message: ${id}`, (res) => {
-      if (!messages || messages.length === 0) {
-        setMessages(res);
-      } else {
-        setMessages((prevState) => prevState.concat(res));
-      }
-      
+      setMessages((prevState) => {
+        const prevMessages = Array.isArray(prevState) ? prevState : [];
+        return prevMessages.concat(res);
+      });
     });
 
     return () => {
@@ -65,14 +64,14 @@ export default function ChatRoom() {
   }, []);
 
   const sendMessage = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     if (socket && inputMessage.trim() !== "") {
       const data = {
         chatRoomId: id,
         message: inputMessage,
       };
       socket.emit("message", data, (res) => {
-        console.log('sendMessage res', res);
+        console.log("sendMessage res", res);
       });
       setInputMessage("");
     }
@@ -89,38 +88,42 @@ export default function ChatRoom() {
         if (res.statusCode === 200) {
           setMessages(res.data);
         } else {
-          alert(res.message)
+          alert(res.message);
         }
-        
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
   }, []);
-  console.log(messages)
+
   return (
     <>
-      <div className={style.chatRoom}>
+      <div className={style.chatRoom} style={{ marginBottom: "50px" }}>
         <div id="chatContainer" className={style.messages}>
-          {messages && messages.map((message, index) => (
-            <div key={index}>
-              {message.userId === user.id ? (
-                <div className={style.sender}>
-                  <p className={style.dateTime}>{format(new Date(message.createdAt), 'a hh:mm')}</p>
-                  <p className={style.message}>{message.content}</p>
-                </div>
-              ) : (
-                <div className={style.receiver}>
-                  <span className={style.nickName}>{message.user.nickName}</span>
-                  <div style={{ display: "flex" }}>
+          {messages &&
+            messages.map((message, index) => (
+              <div key={index}>
+                {message.userId === user.id ? (
+                  <div className={style.sender}>
+                    <p className={style.dateTime}>
+                      {format(new Date(message.createdAt), "a hh:mm")}
+                    </p>
                     <p className={style.message}>{message.content}</p>
-                    <p className={style.dateTime}>{message.createdAt}</p>
                   </div>
-                </div>
-              )}
-            </div>
-          ))}
+                ) : (
+                  <div className={style.receiver}>
+                    <span className={style.nickName}>
+                      {message.user.nickName}
+                    </span>
+                    <div style={{ display: "flex" }}>
+                      <p className={style.message}>{message.content}</p>
+                      <p className={style.dateTime}>{message.createdAt}</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
         </div>
         <div className={style.sendContainer}>
           <input
