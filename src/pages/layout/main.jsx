@@ -77,7 +77,7 @@ export default function Main() {
       <div
         className={style.missionContainer}
         onClick={() => {
-          if (mission) {
+          if (mission === mission.length > 0) {
             navigate("/places");
           }
         }}

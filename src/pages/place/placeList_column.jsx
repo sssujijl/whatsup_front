@@ -36,6 +36,7 @@ export default function PlaceList(props) {
         console.log(err);
       }
     };
+
     fetechDate();
   }, []);
 
