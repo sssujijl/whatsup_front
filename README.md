@@ -10,8 +10,8 @@
   <p align="center" style="font-size:13pt;">칭호와 미션이 있는 즐거운 맛집 서비스, <span style="font-weight: bold;">왔쩝!</span></p>
 
   #### Front Repository
-  <a href="https://github.com/sssujijl/What-s-UP-"><p>백엔드 리포지토리 바로가기</p></a>
-    <p align="center">
+  [백엔드 리포지토리 바로가기](https://github.com/sssujijl/What-s-UP-)
+
 ________
 
 ## 기술 스택 🔧
